@@ -41,7 +41,7 @@
     if (v === 'tableau') RT.showTableau();
     if (v === 'admin') RT.showAdmin();
     if (v === 'projet' && !inited.er) { renderER(); inited.er = true; }
-    if (RT._world) RT._world.controls().enabled = v === 'accueil';
+    if (RT._world) RT._world.controls().enabled = v === 'accueil' && RT.globeInteractive();
     if (v !== 'accueil') window.scrollTo(0, 0);
   }
 

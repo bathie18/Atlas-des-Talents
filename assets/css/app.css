@@ -532,3 +532,11 @@ table.data td.num, table.data td.mono { white-space: nowrap; }
 
 @media (max-width: 1000px) { .une-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ent-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ov-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .login-wrap { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .une-grid, .ent-filters, .form-grid { grid-template-columns: 1fr; } .account .btn { padding: 6px 10px; } }
+
+/* Bouton tactile : activer la rotation du globe sans bloquer le défilement */
+.globe-toggle {
+  position: absolute; z-index: 6; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  background: rgb(18 14 51 / .8); color: #F3F0FF; border: 1px solid rgb(255 255 255 / .25); border-radius: 999px;
+  padding: 10px 18px; font-size: var(--t-sm); font-weight: 600; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); white-space: nowrap;
+}
+.globe-toggle[aria-pressed="true"] { background: #F060B4; color: #1A0B1F; border-color: transparent; }

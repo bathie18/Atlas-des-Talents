@@ -70,6 +70,25 @@
     return Math.max(1.2, 1 / Math.sin(Math.atan(x)) - 1);
   }
 
+  const TOUCH = matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints > 0;
+  let interactive = true;
+  RT.globeInteractive = () => interactive;
+  RT.setGlobeInteractive = (on) => {
+    interactive = on;
+    const btn = RT.$('#globe-toggle'), canvas = RT.$('#globe canvas');
+    if (world) {
+      const ctl = world.controls(); ctl.enabled = on;
+      if (!on && !matchMedia('(prefers-reduced-motion: reduce)').matches) ctl.autoRotate = true;
+    }
+    if (canvas) canvas.style.touchAction = on ? 'none' : 'pan-y';
+    RT.$('#globe').style.touchAction = on ? 'none' : 'pan-y';
+    if (btn) {
+      btn.hidden = !TOUCH;
+      btn.setAttribute('aria-pressed', String(on));
+      btn.textContent = on ? 'Terminé : faire défiler la page' : 'Faire tourner le globe';
+    }
+  };
+
   RT.initGlobe = () => {
     const el = RT.$('#globe');
     if (typeof Globe !== 'function') { el.innerHTML = '<div class="globe-fallback">Le globe nécessite WebGL et une connexion pour charger globe.gl.</div>'; return; }
@@ -124,7 +143,10 @@
       const ctl = world.controls();
       ctl.autoRotate = !matchMedia('(prefers-reduced-motion: reduce)').matches;
       ctl.autoRotateSpeed = 0.35; ctl.enableZoom = true; ctl.minDistance = 120; ctl.maxDistance = 650;
-      el.addEventListener('pointerdown', () => (ctl.autoRotate = false), { once: true });
+      el.addEventListener('pointerdown', () => { if (RT.globeInteractive()) ctl.autoRotate = false; });
+      // Écran tactile : par défaut le doigt fait défiler la page ; le globe ne tourne
+      // qu'après avoir appuyé sur « Faire tourner le globe ».
+      RT.setGlobeInteractive(!TOUCH);
       world.pointOfView({ lat: 22, lng: -16, altitude: fitAltitude(el) });
       const size = () => { world.width(el.clientWidth).height(el.clientHeight); drawRibbons(); };
       world.onZoom(() => drawRibbons());
@@ -200,5 +222,6 @@
     const s = RT.attachSuggest(RT.$('#home-q'), RT.$('#home-suggest'), focusPlace);
     RT.$('#home-search').addEventListener('submit', (e) => { e.preventDefault(); s.submit(); });
     RT.initGlobe();
+    const gt = RT.$('#globe-toggle'); if (gt) gt.onclick = () => RT.setGlobeInteractive(!RT.globeInteractive());
   };
 })();
