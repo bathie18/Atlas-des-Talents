@@ -1,0 +1,1183 @@
+{
+ "domaines": [
+  {
+   "code": "NUM",
+   "libelle": "Numérique & data",
+   "couleur": "#2F6FB0",
+   "filieres": [
+    {
+     "libelle": "Développement logiciel",
+     "metiers": [
+      "Développeur·se full-stack",
+      "Architecte logiciel",
+      "Ingénieur·e DevOps",
+      "Lead développeur·se"
+     ]
+    },
+    {
+     "libelle": "Data & IA",
+     "metiers": [
+      "Data scientist",
+      "Data engineer",
+      "Ingénieur·e IA / ML",
+      "Analyste BI"
+     ]
+    },
+    {
+     "libelle": "Cybersécurité & réseaux",
+     "metiers": [
+      "Expert·e cybersécurité",
+      "Ingénieur·e réseaux",
+      "RSSI"
+     ]
+    }
+   ]
+  },
+  {
+   "code": "GEO",
+   "libelle": "Géomatique, territoires & urbanisme",
+   "couleur": "#1F8A70",
+   "filieres": [
+    {
+     "libelle": "Géomatique & SIG",
+     "metiers": [
+      "Ingénieur·e géomaticien·ne",
+      "Administrateur·rice SIG",
+      "Développeur·se WebSIG",
+      "Géomètre-topographe"
+     ]
+    },
+    {
+     "libelle": "Aménagement & urbanisme",
+     "metiers": [
+      "Urbaniste",
+      "Chargé·e de mission aménagement",
+      "Ingénieur·e territorial·e"
+     ]
+    }
+   ]
+  },
+  {
+   "code": "SAN",
+   "libelle": "Santé & sciences de la vie",
+   "couleur": "#C2410C",
+   "filieres": [
+    {
+     "libelle": "Médecine",
+     "metiers": [
+      "Médecin généraliste",
+      "Médecin spécialiste",
+      "Chirurgien·ne",
+      "Pharmacien·ne"
+     ]
+    },
+    {
+     "libelle": "Soins & santé publique",
+     "metiers": [
+      "Infirmier·ère",
+      "Épidémiologiste",
+      "Cadre de santé"
+     ]
+    },
+    {
+     "libelle": "Biotechnologies",
+     "metiers": [
+      "Chercheur·se en biologie",
+      "Ingénieur·e biomédical·e"
+     ]
+    }
+   ]
+  },
+  {
+   "code": "FIN",
+   "libelle": "Finance, banque & assurance",
+   "couleur": "#B08A1E",
+   "filieres": [
+    {
+     "libelle": "Banque & marchés",
+     "metiers": [
+      "Analyste financier·ère",
+      "Chargé·e d'affaires",
+      "Trader",
+      "Risk manager"
+     ]
+    },
+    {
+     "libelle": "Audit & comptabilité",
+     "metiers": [
+      "Auditeur·rice",
+      "Expert·e-comptable",
+      "Contrôleur·se de gestion",
+      "Directeur·rice financier·ère"
+     ]
+    },
+    {
+     "libelle": "Fintech & microfinance",
+     "metiers": [
+      "Product manager fintech",
+      "Spécialiste microfinance"
+     ]
+    }
+   ]
+  },
+  {
+   "code": "ING",
+   "libelle": "Ingénierie & industrie",
+   "couleur": "#475569",
+   "filieres": [
+    {
+     "libelle": "Génie industriel",
+     "metiers": [
+      "Ingénieur·e méthodes",
+      "Responsable production",
+      "Ingénieur·e qualité"
+     ]
+    },
+    {
+     "libelle": "Mécanique & aéronautique",
+     "metiers": [
+      "Ingénieur·e mécanique",
+      "Ingénieur·e aéronautique"
+     ]
+    }
+   ]
+  },
+  {
+   "code": "ENE",
+   "libelle": "Énergie, mines & environnement",
+   "couleur": "#0E7490",
+   "filieres": [
+    {
+     "libelle": "Énergies renouvelables",
+     "metiers": [
+      "Ingénieur·e solaire",
+      "Chef·fe de projet éolien",
+      "Ingénieur·e réseaux électriques"
+     ]
+    },
+    {
+     "libelle": "Pétrole, gaz & mines",
+     "metiers": [
+      "Ingénieur·e pétrolier·ère",
+      "Géologue",
+      "Ingénieur·e des mines"
+     ]
+    },
+    {
+     "libelle": "Climat & environnement",
+     "metiers": [
+      "Expert·e climat",
+      "Ingénieur·e environnement",
+      "Hydrologue"
+     ]
+    }
+   ]
+  },
+  {
+   "code": "BTP",
+   "libelle": "BTP & infrastructures",
+   "couleur": "#9A3412",
+   "filieres": [
+    {
+     "libelle": "Génie civil",
+     "metiers": [
+      "Ingénieur·e structure",
+      "Conducteur·rice de travaux",
+      "Ingénieur·e ouvrages d'art"
+     ]
+    },
+    {
+     "libelle": "Architecture",
+     "metiers": [
+      "Architecte",
+      "BIM manager"
+     ]
+    },
+    {
+     "libelle": "Transport & mobilité",
+     "metiers": [
+      "Ingénieur·e transport",
+      "Planificateur·rice mobilité"
+     ]
+    }
+   ]
+  },
+  {
+   "code": "AGR",
+   "libelle": "Agriculture & agro-industrie",
+   "couleur": "#4D7C0F",
+   "filieres": [
+    {
+     "libelle": "Agronomie",
+     "metiers": [
+      "Ingénieur·e agronome",
+      "Spécialiste irrigation",
+      "Chercheur·se en agronomie"
+     ]
+    },
+    {
+     "libelle": "Agro-alimentaire",
+     "metiers": [
+      "Ingénieur·e agro-alimentaire",
+      "Responsable qualité alimentaire"
+     ]
+    }
+   ]
+  },
+  {
+   "code": "EDU",
+   "libelle": "Éducation, recherche & formation",
+   "couleur": "#7C3AED",
+   "filieres": [
+    {
+     "libelle": "Enseignement supérieur & recherche",
+     "metiers": [
+      "Enseignant·e-chercheur·se",
+      "Maître de conférences",
+      "Post-doctorant·e"
+     ]
+    },
+    {
+     "libelle": "Formation",
+     "metiers": [
+      "Formateur·rice",
+      "Ingénieur·e pédagogique",
+      "Professeur·e"
+     ]
+    }
+   ]
+  },
+  {
+   "code": "DRO",
+   "libelle": "Droit, gouvernance & politiques publiques",
+   "couleur": "#334155",
+   "filieres": [
+    {
+     "libelle": "Droit",
+     "metiers": [
+      "Avocat·e",
+      "Juriste d'affaires",
+      "Juriste en droit international"
+     ]
+    },
+    {
+     "libelle": "Administration & coopération",
+     "metiers": [
+      "Cadre de la fonction publique",
+      "Chargé·e de coopération internationale",
+      "Diplomate"
+     ]
+    }
+   ]
+  },
+  {
+   "code": "ENT",
+   "libelle": "Commerce, entrepreneuriat & conseil",
+   "couleur": "#DB2777",
+   "filieres": [
+    {
+     "libelle": "Entrepreneuriat",
+     "metiers": [
+      "Fondateur·rice de start-up",
+      "Chef·fe d'entreprise",
+      "Investisseur·se / business angel"
+     ]
+    },
+    {
+     "libelle": "Conseil & management",
+     "metiers": [
+      "Consultant·e en stratégie",
+      "Chef·fe de projet",
+      "Directeur·rice des opérations"
+     ]
+    },
+    {
+     "libelle": "Commerce & marketing",
+     "metiers": [
+      "Responsable marketing",
+      "Business developer",
+      "Responsable commercial·e"
+     ]
+    }
+   ]
+  },
+  {
+   "code": "LOG",
+   "libelle": "Logistique, transport & supply chain",
+   "couleur": "#57534E",
+   "filieres": [
+    {
+     "libelle": "Supply chain",
+     "metiers": [
+      "Responsable supply chain",
+      "Acheteur·se international·e",
+      "Responsable logistique"
+     ]
+    },
+    {
+     "libelle": "Aérien & maritime",
+     "metiers": [
+      "Pilote de ligne",
+      "Officier·ère de marine marchande"
+     ]
+    }
+   ]
+  },
+  {
+   "code": "COM",
+   "libelle": "Communication, médias & culture",
+   "couleur": "#BE123C",
+   "filieres": [
+    {
+     "libelle": "Médias",
+     "metiers": [
+      "Journaliste",
+      "Chargé·e de communication",
+      "Producteur·rice audiovisuel·le"
+     ]
+    },
+    {
+     "libelle": "Arts & industries culturelles",
+     "metiers": [
+      "Designer",
+      "Architecte d'intérieur",
+      "Directeur·rice artistique"
+     ]
+    }
+   ]
+  },
+  {
+   "code": "RH",
+   "libelle": "Ressources humaines & social",
+   "couleur": "#0F766E",
+   "filieres": [
+    {
+     "libelle": "Ressources humaines",
+     "metiers": [
+      "DRH",
+      "Chargé·e de recrutement",
+      "Responsable formation"
+     ]
+    },
+    {
+     "libelle": "Économie sociale & solidaire",
+     "metiers": [
+      "Chef·fe de projet ONG",
+      "Travailleur·se social·e"
+     ]
+    }
+   ]
+  }
+ ],
+ "secteurs": [
+  "Grand groupe",
+  "PME / ETI",
+  "Start-up",
+  "Secteur public",
+  "Collectivité territoriale",
+  "Organisation internationale",
+  "ONG / association",
+  "Université / recherche",
+  "Indépendant·e / cabinet",
+  "Établissement de santé"
+ ],
+ "niveaux": [
+  "Bac+2/3",
+  "Bac+5 / Master",
+  "Ingénieur·e",
+  "Doctorat",
+  "MBA / Executive"
+ ],
+ "langues": [
+  "Français",
+  "Wolof",
+  "Anglais",
+  "Espagnol",
+  "Pulaar",
+  "Sérère",
+  "Diola",
+  "Italien",
+  "Allemand",
+  "Portugais",
+  "Arabe",
+  "Mandingue"
+ ],
+ "contributions": [
+  "Mentorat (Give Back)",
+  "Recrutement / PPED",
+  "Missions d'expertise",
+  "Investissement",
+  "Formation / conférences",
+  "Accueil de stagiaires"
+ ],
+ "statuts": [
+  "Membre actif",
+  "Membre adhérent",
+  "Membre fondateur",
+  "Membre d'honneur"
+ ],
+ "villes": [
+  {
+   "nom": "Paris",
+   "pays": "FR",
+   "lat": 48.8566,
+   "lon": 2.3522
+  },
+  {
+   "nom": "Lyon",
+   "pays": "FR",
+   "lat": 45.764,
+   "lon": 4.8357
+  },
+  {
+   "nom": "Marseille",
+   "pays": "FR",
+   "lat": 43.2965,
+   "lon": 5.3698
+  },
+  {
+   "nom": "Lille",
+   "pays": "FR",
+   "lat": 50.6292,
+   "lon": 3.0573
+  },
+  {
+   "nom": "Toulouse",
+   "pays": "FR",
+   "lat": 43.6047,
+   "lon": 1.4442
+  },
+  {
+   "nom": "Bordeaux",
+   "pays": "FR",
+   "lat": 44.8378,
+   "lon": -0.5792
+  },
+  {
+   "nom": "Dijon",
+   "pays": "FR",
+   "lat": 47.322,
+   "lon": 5.0415
+  },
+  {
+   "nom": "Strasbourg",
+   "pays": "FR",
+   "lat": 48.5734,
+   "lon": 7.7521
+  },
+  {
+   "nom": "Nantes",
+   "pays": "FR",
+   "lat": 47.2184,
+   "lon": -1.5536
+  },
+  {
+   "nom": "Montpellier",
+   "pays": "FR",
+   "lat": 43.6108,
+   "lon": 3.8767
+  },
+  {
+   "nom": "Rouen",
+   "pays": "FR",
+   "lat": 49.4432,
+   "lon": 1.0999
+  },
+  {
+   "nom": "Grenoble",
+   "pays": "FR",
+   "lat": 45.1885,
+   "lon": 5.7245
+  },
+  {
+   "nom": "Auxerre",
+   "pays": "FR",
+   "lat": 47.7982,
+   "lon": 3.5673
+  },
+  {
+   "nom": "Le Havre",
+   "pays": "FR",
+   "lat": 49.4944,
+   "lon": 0.1079
+  },
+  {
+   "nom": "Reims",
+   "pays": "FR",
+   "lat": 49.2583,
+   "lon": 4.0317
+  },
+  {
+   "nom": "Bruxelles",
+   "pays": "BE",
+   "lat": 50.8503,
+   "lon": 4.3517
+  },
+  {
+   "nom": "Liège",
+   "pays": "BE",
+   "lat": 50.6326,
+   "lon": 5.5797
+  },
+  {
+   "nom": "Genève",
+   "pays": "CH",
+   "lat": 46.2044,
+   "lon": 6.1432
+  },
+  {
+   "nom": "Lausanne",
+   "pays": "CH",
+   "lat": 46.5197,
+   "lon": 6.6323
+  },
+  {
+   "nom": "Luxembourg",
+   "pays": "LU",
+   "lat": 49.6116,
+   "lon": 6.1319
+  },
+  {
+   "nom": "Berlin",
+   "pays": "DE",
+   "lat": 52.52,
+   "lon": 13.405
+  },
+  {
+   "nom": "Francfort",
+   "pays": "DE",
+   "lat": 50.1109,
+   "lon": 8.6821
+  },
+  {
+   "nom": "Amsterdam",
+   "pays": "NL",
+   "lat": 52.3676,
+   "lon": 4.9041
+  },
+  {
+   "nom": "Londres",
+   "pays": "GB",
+   "lat": 51.5074,
+   "lon": -0.1278
+  },
+  {
+   "nom": "Manchester",
+   "pays": "GB",
+   "lat": 53.4808,
+   "lon": -2.2426
+  },
+  {
+   "nom": "Madrid",
+   "pays": "ES",
+   "lat": 40.4168,
+   "lon": -3.7038
+  },
+  {
+   "nom": "Barcelone",
+   "pays": "ES",
+   "lat": 41.3874,
+   "lon": 2.1686
+  },
+  {
+   "nom": "Milan",
+   "pays": "IT",
+   "lat": 45.4642,
+   "lon": 9.19
+  },
+  {
+   "nom": "Rome",
+   "pays": "IT",
+   "lat": 41.9028,
+   "lon": 12.4964
+  },
+  {
+   "nom": "Turin",
+   "pays": "IT",
+   "lat": 45.0703,
+   "lon": 7.6869
+  },
+  {
+   "nom": "Lisbonne",
+   "pays": "PT",
+   "lat": 38.7223,
+   "lon": -9.1393
+  },
+  {
+   "nom": "Stockholm",
+   "pays": "SE",
+   "lat": 59.3293,
+   "lon": 18.0686
+  },
+  {
+   "nom": "Montréal",
+   "pays": "CA",
+   "lat": 45.5017,
+   "lon": -73.5673
+  },
+  {
+   "nom": "Québec",
+   "pays": "CA",
+   "lat": 46.8139,
+   "lon": -71.208
+  },
+  {
+   "nom": "Ottawa",
+   "pays": "CA",
+   "lat": 45.4215,
+   "lon": -75.6972
+  },
+  {
+   "nom": "Toronto",
+   "pays": "CA",
+   "lat": 43.6532,
+   "lon": -79.3832
+  },
+  {
+   "nom": "New York",
+   "pays": "US",
+   "lat": 40.7128,
+   "lon": -74.006
+  },
+  {
+   "nom": "Washington",
+   "pays": "US",
+   "lat": 38.9072,
+   "lon": -77.0369
+  },
+  {
+   "nom": "Atlanta",
+   "pays": "US",
+   "lat": 33.749,
+   "lon": -84.388
+  },
+  {
+   "nom": "Houston",
+   "pays": "US",
+   "lat": 29.7604,
+   "lon": -95.3698
+  },
+  {
+   "nom": "Chicago",
+   "pays": "US",
+   "lat": 41.8781,
+   "lon": -87.6298
+  },
+  {
+   "nom": "Boston",
+   "pays": "US",
+   "lat": 42.3601,
+   "lon": -71.0589
+  },
+  {
+   "nom": "San Francisco",
+   "pays": "US",
+   "lat": 37.7749,
+   "lon": -122.4194
+  },
+  {
+   "nom": "São Paulo",
+   "pays": "BR",
+   "lat": -23.5505,
+   "lon": -46.6333
+  },
+  {
+   "nom": "Casablanca",
+   "pays": "MA",
+   "lat": 33.5731,
+   "lon": -7.5898
+  },
+  {
+   "nom": "Rabat",
+   "pays": "MA",
+   "lat": 34.0209,
+   "lon": -6.8416
+  },
+  {
+   "nom": "Tunis",
+   "pays": "TN",
+   "lat": 36.8065,
+   "lon": 10.1815
+  },
+  {
+   "nom": "Abidjan",
+   "pays": "CI",
+   "lat": 5.36,
+   "lon": -4.0083
+  },
+  {
+   "nom": "Accra",
+   "pays": "GH",
+   "lat": 5.6037,
+   "lon": -0.187
+  },
+  {
+   "nom": "Bamako",
+   "pays": "ML",
+   "lat": 12.6392,
+   "lon": -8.0029
+  },
+  {
+   "nom": "Nouakchott",
+   "pays": "MR",
+   "lat": 18.0735,
+   "lon": -15.9582
+  },
+  {
+   "nom": "Libreville",
+   "pays": "GA",
+   "lat": 0.4162,
+   "lon": 9.4673
+  },
+  {
+   "nom": "Kigali",
+   "pays": "RW",
+   "lat": -1.9441,
+   "lon": 30.0619
+  },
+  {
+   "nom": "Nairobi",
+   "pays": "KE",
+   "lat": -1.2921,
+   "lon": 36.8219
+  },
+  {
+   "nom": "Johannesburg",
+   "pays": "ZA",
+   "lat": -26.2041,
+   "lon": 28.0473
+  },
+  {
+   "nom": "Dubaï",
+   "pays": "AE",
+   "lat": 25.2048,
+   "lon": 55.2708
+  },
+  {
+   "nom": "Doha",
+   "pays": "QA",
+   "lat": 25.2854,
+   "lon": 51.531
+  },
+  {
+   "nom": "Istanbul",
+   "pays": "TR",
+   "lat": 41.0082,
+   "lon": 28.9784
+  },
+  {
+   "nom": "Shanghai",
+   "pays": "CN",
+   "lat": 31.2304,
+   "lon": 121.4737
+  },
+  {
+   "nom": "Tokyo",
+   "pays": "JP",
+   "lat": 35.6762,
+   "lon": 139.6503
+  },
+  {
+   "nom": "Singapour",
+   "pays": "SG",
+   "lat": 1.3521,
+   "lon": 103.8198
+  },
+  {
+   "nom": "Sydney",
+   "pays": "AU",
+   "lat": -33.8688,
+   "lon": 151.2093
+  },
+  {
+   "nom": "Dakar",
+   "pays": "SN",
+   "lat": 14.7167,
+   "lon": -17.4677
+  },
+  {
+   "nom": "Thiès",
+   "pays": "SN",
+   "lat": 14.791,
+   "lon": -16.9359
+  },
+  {
+   "nom": "Saint-Louis",
+   "pays": "SN",
+   "lat": 16.0326,
+   "lon": -16.4818
+  },
+  {
+   "nom": "Ziguinchor",
+   "pays": "SN",
+   "lat": 12.5681,
+   "lon": -16.2719
+  },
+  {
+   "nom": "Kaolack",
+   "pays": "SN",
+   "lat": 14.1652,
+   "lon": -16.0726
+  },
+  {
+   "nom": "Touba",
+   "pays": "SN",
+   "lat": 14.8667,
+   "lon": -15.8833
+  },
+  {
+   "nom": "Tambacounda",
+   "pays": "SN",
+   "lat": 13.7707,
+   "lon": -13.6673
+  },
+  {
+   "nom": "Nice",
+   "pays": "FR",
+   "lat": 43.7102,
+   "lon": 7.262
+  },
+  {
+   "nom": "Rennes",
+   "pays": "FR",
+   "lat": 48.1173,
+   "lon": -1.6778
+  },
+  {
+   "nom": "Orléans",
+   "pays": "FR",
+   "lat": 47.9029,
+   "lon": 1.9093
+  },
+  {
+   "nom": "Besançon",
+   "pays": "FR",
+   "lat": 47.2378,
+   "lon": 6.0241
+  },
+  {
+   "nom": "Clermont-Ferrand",
+   "pays": "FR",
+   "lat": 45.7772,
+   "lon": 3.087
+  },
+  {
+   "nom": "Saint-Étienne",
+   "pays": "FR",
+   "lat": 45.4397,
+   "lon": 4.3872
+  },
+  {
+   "nom": "Le Mans",
+   "pays": "FR",
+   "lat": 48.0061,
+   "lon": 0.1996
+  },
+  {
+   "nom": "Metz",
+   "pays": "FR",
+   "lat": 49.1193,
+   "lon": 6.1757
+  },
+  {
+   "nom": "Nancy",
+   "pays": "FR",
+   "lat": 48.6921,
+   "lon": 6.1844
+  },
+  {
+   "nom": "Angers",
+   "pays": "FR",
+   "lat": 47.4784,
+   "lon": -0.5632
+  },
+  {
+   "nom": "Poitiers",
+   "pays": "FR",
+   "lat": 46.5802,
+   "lon": 0.3404
+  },
+  {
+   "nom": "Anvers",
+   "pays": "BE",
+   "lat": 51.2194,
+   "lon": 4.4025
+  },
+  {
+   "nom": "Zurich",
+   "pays": "CH",
+   "lat": 47.3769,
+   "lon": 8.5417
+  },
+  {
+   "nom": "Munich",
+   "pays": "DE",
+   "lat": 48.1351,
+   "lon": 11.582
+  },
+  {
+   "nom": "Hambourg",
+   "pays": "DE",
+   "lat": 53.5511,
+   "lon": 9.9937
+  },
+  {
+   "nom": "Bruxelles-Capitale",
+   "pays": "BE",
+   "lat": 50.8503,
+   "lon": 4.3517
+  },
+  {
+   "nom": "Naples",
+   "pays": "IT",
+   "lat": 40.8518,
+   "lon": 14.2681
+  },
+  {
+   "nom": "Bologne",
+   "pays": "IT",
+   "lat": 44.4949,
+   "lon": 11.3426
+  },
+  {
+   "nom": "Séville",
+   "pays": "ES",
+   "lat": 37.3891,
+   "lon": -5.9845
+  },
+  {
+   "nom": "Valence",
+   "pays": "ES",
+   "lat": 39.4699,
+   "lon": -0.3763
+  },
+  {
+   "nom": "Porto",
+   "pays": "PT",
+   "lat": 41.1579,
+   "lon": -8.6291
+  },
+  {
+   "nom": "Édimbourg",
+   "pays": "GB",
+   "lat": 55.9533,
+   "lon": -3.1883
+  },
+  {
+   "nom": "Dublin",
+   "pays": "IE",
+   "lat": 53.3498,
+   "lon": -6.2603
+  },
+  {
+   "nom": "Vancouver",
+   "pays": "CA",
+   "lat": 49.2827,
+   "lon": -123.1207
+  },
+  {
+   "nom": "Calgary",
+   "pays": "CA",
+   "lat": 51.0447,
+   "lon": -114.0719
+  },
+  {
+   "nom": "Los Angeles",
+   "pays": "US",
+   "lat": 34.0522,
+   "lon": -118.2437
+  },
+  {
+   "nom": "Miami",
+   "pays": "US",
+   "lat": 25.7617,
+   "lon": -80.1918
+  },
+  {
+   "nom": "Philadelphie",
+   "pays": "US",
+   "lat": 39.9526,
+   "lon": -75.1652
+  },
+  {
+   "nom": "Seattle",
+   "pays": "US",
+   "lat": 47.6062,
+   "lon": -122.3321
+  },
+  {
+   "nom": "Lagos",
+   "pays": "NG",
+   "lat": 6.5244,
+   "lon": 3.3792
+  },
+  {
+   "nom": "Le Caire",
+   "pays": "EG",
+   "lat": 30.0444,
+   "lon": 31.2357
+  },
+  {
+   "nom": "Banjul",
+   "pays": "GM",
+   "lat": 13.4549,
+   "lon": -16.579
+  },
+  {
+   "nom": "Conakry",
+   "pays": "GN",
+   "lat": 9.6412,
+   "lon": -13.5784
+  },
+  {
+   "nom": "Praia",
+   "pays": "CV",
+   "lat": 14.933,
+   "lon": -23.5133
+  },
+  {
+   "nom": "Lomé",
+   "pays": "TG",
+   "lat": 6.1319,
+   "lon": 1.2228
+  },
+  {
+   "nom": "Cotonou",
+   "pays": "BJ",
+   "lat": 6.3703,
+   "lon": 2.3912
+  },
+  {
+   "nom": "Ouagadougou",
+   "pays": "BF",
+   "lat": 12.3714,
+   "lon": -1.5197
+  },
+  {
+   "nom": "Niamey",
+   "pays": "NE",
+   "lat": 13.5116,
+   "lon": 2.1254
+  },
+  {
+   "nom": "Yaoundé",
+   "pays": "CM",
+   "lat": 3.848,
+   "lon": 11.5021
+  },
+  {
+   "nom": "Douala",
+   "pays": "CM",
+   "lat": 4.0511,
+   "lon": 9.7679
+  },
+  {
+   "nom": "Kinshasa",
+   "pays": "CD",
+   "lat": -4.4419,
+   "lon": 15.2663
+  },
+  {
+   "nom": "Addis-Abeba",
+   "pays": "ET",
+   "lat": 9.03,
+   "lon": 38.74
+  },
+  {
+   "nom": "Riyad",
+   "pays": "SA",
+   "lat": 24.7136,
+   "lon": 46.6753
+  },
+  {
+   "nom": "Abou Dabi",
+   "pays": "AE",
+   "lat": 24.4539,
+   "lon": 54.3773
+  },
+  {
+   "nom": "Pékin",
+   "pays": "CN",
+   "lat": 39.9042,
+   "lon": 116.4074
+  },
+  {
+   "nom": "Séoul",
+   "pays": "KR",
+   "lat": 37.5665,
+   "lon": 126.978
+  },
+  {
+   "nom": "Mumbai",
+   "pays": "IN",
+   "lat": 19.076,
+   "lon": 72.8777
+  },
+  {
+   "nom": "Melbourne",
+   "pays": "AU",
+   "lat": -37.8136,
+   "lon": 144.9631
+  },
+  {
+   "nom": "Mexico",
+   "pays": "MX",
+   "lat": 19.4326,
+   "lon": -99.1332
+  },
+  {
+   "nom": "Buenos Aires",
+   "pays": "AR",
+   "lat": -34.6037,
+   "lon": -58.3816
+  },
+  {
+   "nom": "Moscou",
+   "pays": "RU",
+   "lat": 55.7558,
+   "lon": 37.6173
+  },
+  {
+   "nom": "Varsovie",
+   "pays": "PL",
+   "lat": 52.2297,
+   "lon": 21.0122
+  },
+  {
+   "nom": "Vienne",
+   "pays": "AT",
+   "lat": 48.2082,
+   "lon": 16.3738
+  },
+  {
+   "nom": "Copenhague",
+   "pays": "DK",
+   "lat": 55.6761,
+   "lon": 12.5683
+  },
+  {
+   "nom": "Oslo",
+   "pays": "NO",
+   "lat": 59.9139,
+   "lon": 10.7522
+  },
+  {
+   "nom": "Helsinki",
+   "pays": "FI",
+   "lat": 60.1699,
+   "lon": 24.9384
+  },
+  {
+   "nom": "Athènes",
+   "pays": "GR",
+   "lat": 37.9838,
+   "lon": 23.7275
+  },
+  {
+   "nom": "Prague",
+   "pays": "CZ",
+   "lat": 50.0755,
+   "lon": 14.4378
+  }
+ ]
+}

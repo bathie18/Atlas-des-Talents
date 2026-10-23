@@ -1,0 +1,18 @@
+{
+  "name": "risce-talents",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Prototype de plateforme cartographique des talents de la diaspora sénégalaise (RISCE)",
+  "type": "module",
+  "scripts": {
+    "pays": "node scripts/build-countries.mjs && node scripts/build-countries.mjs node_modules/world-atlas/countries-110m.json data/pays-110m.topo.json",
+    "demo": "python3 scripts/generer_donnees_demo.py",
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "i18n-iso-countries": "7.14.0",
+    "topojson-client": "3.1.0",
+    "world-atlas": "2.0.2"
+  },
+  "license": "MIT"
+}

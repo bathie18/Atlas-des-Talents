@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RISCE Nos talents</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Prototype de plateforme cartographique des talents de la diaspora sénégalaise pour le RISCE.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="stylesheet" href="vendor/maplibre-gl.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<!-- Bibliothèques open source (versions figées) -->
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/globe.gl@2.46.2/dist/globe.gl.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5.6.0/dist/maplibre-gl.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#accueil" aria-label="RISCE, Nos talents, accueil">
+      <img src="assets/img/risce-globe.png" alt="" width="38" height="38">
+      <span class="word"><b>RISCE</b><span>Nos talents</span></span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#accueil">Accueil</a>
+      <a href="#carte">Carte des talents</a>
+      <a href="#talents">Trouver un talent</a>
+      <a href="#tableau">Tableau de bord</a>
+      <a href="#rejoindre">Rejoindre</a>
+      <a href="#projet">Le projet</a>
+      <a href="#admin" class="admin-link" id="nav-admin" hidden>Administration</a>
+    </nav>
+    <button class="role-chip" id="role-chip" type="button" aria-label="Changer de profil de démonstration">
+      <span class="av" id="role-av">V</span><span class="lbl" id="role-lbl">Visiteur</span>
+    </button>
+  </div>
+</header>
+<div class="demo-banner">
+  <div class="wrap">
+    <span><b>Prototype de démonstration</b> · profils fictifs, aucune donnée réelle de membre</span>
+    <button type="button" id="reset-demo">Réinitialiser la démo</button>
+  </div>
+</div>
+
+<main>
+<!-- ==================== ACCUEIL ==================== -->
+<section class="view" id="v-accueil" data-view="accueil">
+  <div class="hero">
+    <div class="hero-stars"></div>
+    <svg class="ribbons back" id="ribbons-back" aria-hidden="true"></svg>
+    <div id="globe" aria-label="Globe des talents de la diaspora sénégalaise"></div>
+    <svg class="ribbons front" id="ribbons-front" aria-hidden="true"></svg>
+    <div class="hero-ui">
+      <div class="wrap">
+        <span class="eyebrow" style="color:#C9C3F0">Réseau International des Sénégalais Cadres et Entrepreneurs de l'Extérieur</span>
+        <h1>Nos talents, <em>partout</em> dans le monde</h1>
+        <p class="tagline" aria-live="off"><span class="pulse" aria-hidden="true"></span><span class="txt">L'intelligence collective au service de la communauté</span></p>
+        <form class="geo-search" id="home-search" autocomplete="off" role="search">
+          <div class="box">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="#ABA6D6" stroke-width="2"/><path d="M20 20l-4-4" stroke="#ABA6D6" stroke-width="2" stroke-linecap="round"/></svg>
+            <label class="sr" for="home-q">Rechercher un pays ou une ville</label>
+            <input id="home-q" type="search" placeholder="Un pays ou une ville : Canada, Lyon, Dubaï…" aria-autocomplete="list" aria-controls="home-suggest">
+            <button class="btn btn-gold" type="submit">Survoler</button>
+          </div>
+          <div class="suggest" id="home-suggest" role="listbox" hidden></div>
+        </form>
+        <div class="quick" id="home-quick" aria-label="Destinations rapides"></div>
+      </div>
+    </div>
+    <aside class="place-card" id="place-card" hidden aria-live="polite"></aside>
+    <div class="hero-foot">
+      <div class="legend">
+        <span><i class="dot" style="background:#FFFFFF"></i>Ville de résidence</span>
+        <span><i class="dot" style="background:#F060B4"></i>Liens vers le Sénégal</span>
+      </div>
+      <span>Arcs convergeant vers Dakar · 14°41′N 17°26′O</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="kpis" id="home-kpis"></div>
+  </div>
+
+  <div class="wrap section">
+    <div class="home-grid">
+      <div>
+        <div class="section-head" style="margin-bottom:8px">
+          <div>
+            <span class="eyebrow">Comment ça marche</span>
+            <h2>Un annuaire vivant, validé par le réseau</h2>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step"><div><h3>Le ou la membre dépose son profil</h3><p>Métier, filière, ville de résidence, langues, CV et la manière dont il ou elle souhaite contribuer : mentorat, recrutement, expertise, investissement.</p></div></div>
+          <div class="step"><div><h3>Le ou la référent·e pays vérifie</h3><p>Un·e référent·e de l'antenne locale confirme l'identité et l'appartenance au réseau, ou demande des compléments.</p></div></div>
+          <div class="step"><div><h3>La commission valide l'adhésion</h3><p>Le compte est activé ; le profil apparaît sur la carte avec le niveau de visibilité choisi par la personne.</p></div></div>
+          <div class="step"><div><h3>Le réseau se met en relation</h3><p>Programmes PPED, Give Back et Diaspora Connect, institutions et partenaires trouvent les compétences dont ils ont besoin, au bon endroit.</p></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="section-head" style="margin-bottom:12px">
+          <div>
+            <span class="eyebrow">Domaines d'expertise</span>
+            <h2>Où sont nos compétences ?</h2>
+          </div>
+        </div>
+        <div class="domain-list" id="home-domains"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap" style="padding-bottom:48px">
+    <div class="cta-band">
+      <div>
+        <h2>Vous êtes de la diaspora et vous voulez contribuer ?</h2>
+        <p>Rejoignez la carte des talents du RISCE. Votre profil n'est publié qu'après validation, et vous choisissez ce qui est visible.</p>
+      </div>
+      <a class="btn btn-gold" href="#rejoindre">Déposer mon profil</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CARTE ==================== -->
+<section class="view" id="v-carte" data-view="carte" hidden>
+  <div class="map-layout">
+    <aside class="map-side">
+      <div class="side-head">
+        <div class="mini-search geo-search" style="width:100%;margin:0">
+          <label class="sr" for="map-q">Aller à un pays ou une ville</label>
+          <input class="input" id="map-q" type="search" placeholder="Aller à… (pays, ville)" autocomplete="off" aria-controls="map-suggest">
+          <div class="suggest" id="map-suggest" role="listbox" hidden></div>
+        </div>
+        <div class="filters-grid">
+          <div class="field"><label for="mf-dom">Domaine</label><select class="input" id="mf-dom"></select></div>
+          <div class="field"><label for="mf-fil">Filière</label><select class="input" id="mf-fil"></select></div>
+          <div class="field"><label for="mf-contrib">Contribution</label><select class="input" id="mf-contrib"></select></div>
+          <div class="field"><label for="mf-lang">Langue</label><select class="input" id="mf-lang"></select></div>
+        </div>
+      </div>
+      <div class="side-body" id="map-results"></div>
+    </aside>
+    <div class="map-wrap">
+      <div id="map" aria-label="Carte des talents"></div>
+      <div class="map-tools">
+        <button class="btn btn-sm" id="map-world" type="button">Vue monde</button>
+        <button class="btn btn-sm" id="map-osm" type="button" aria-pressed="false">Fond OpenStreetMap</button>
+      </div>
+      <div class="map-legend" id="map-legend"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ANNUAIRE ==================== -->
+<section class="view" id="v-talents" data-view="talents" hidden>
+  <div class="wrap section">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Banque de talents</span>
+        <h2>Trouver un talent</h2>
+        <p>Recherche par mot-clé, métier, filière, ville ou pays. Les fiches complètes et les CV sont réservés aux membres connectés, selon la visibilité choisie par chaque personne.</p>
+      </div>
+    </div>
+    <div class="dir-layout">
+      <aside class="panel dir-filters" aria-label="Recherche avancée">
+        <span class="eyebrow">Recherche avancée</span>
+        <div class="field"><label for="f-dom">Domaine</label><select class="input" id="f-dom"></select></div>
+        <div class="field"><label for="f-fil">Filière</label><select class="input" id="f-fil"></select></div>
+        <div class="field"><label for="f-met">Métier</label><select class="input" id="f-met"></select></div>
+        <div class="field"><label for="f-pays">Pays</label><select class="input" id="f-pays"></select></div>
+        <div class="field"><label for="f-ville">Ville</label><select class="input" id="f-ville"></select></div>
+        <div class="field"><label for="f-sect">Secteur</label><select class="input" id="f-sect"></select></div>
+        <div class="field"><label for="f-niv">Niveau d'études</label><select class="input" id="f-niv"></select></div>
+        <div class="field"><label for="f-exp">Expérience minimale : <span id="f-exp-v" class="num">0</span> ans</label><input id="f-exp" type="range" min="0" max="30" step="1" value="0"></div>
+        <div class="field"><label for="f-lang">Langue parlée</label><select class="input" id="f-lang"></select></div>
+        <div class="field"><label for="f-contrib">Souhaite contribuer par</label><select class="input" id="f-contrib"></select></div>
+        <label class="check"><input type="checkbox" id="f-cv"> CV disponible uniquement</label>
+        <button class="btn btn-ghost btn-sm" type="button" id="f-reset">Effacer les filtres</button>
+      </aside>
+      <div style="min-width:0">
+        <div class="dir-toolbar">
+          <form class="searchbar" id="dir-form" role="search">
+            <label class="sr" for="dir-q">Mot-clé</label>
+            <input class="input" id="dir-q" type="search" placeholder="Mot-clé : PostGIS, cardiologue, OHADA, fintech…">
+            <button class="btn btn-primary" type="submit">Rechercher</button>
+          </form>
+          <div style="display:flex;gap:8px;align-items:center">
+            <label for="dir-sort" class="muted" style="font-size:.8rem">Trier</label>
+            <select class="input" id="dir-sort" style="width:auto">
+              <option value="pertinence">Pertinence</option>
+              <option value="recent">Adhésion récente</option>
+              <option value="exp">Expérience</option>
+              <option value="nom">Nom</option>
+            </select>
+            <button class="btn btn-ghost btn-sm" type="button" id="dir-export" hidden>Exporter (CSV)</button>
+          </div>
+        </div>
+        <p class="muted" id="dir-count" style="font-size:.85rem;margin-bottom:10px"></p>
+        <div class="cards" id="dir-cards"></div>
+        <div class="pager" id="dir-pager"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TABLEAU DE BORD ==================== -->
+<section class="view" id="v-tableau" data-view="tableau" hidden>
+  <div class="wrap section">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Pilotage</span>
+        <h2>Tableau de bord des talents</h2>
+        <p>Effectifs par pays, par ville et par domaine, rythme des adhésions et capacités de contribution du réseau. Les agrégats sont publics ; aucune identité n'y figure.</p>
+      </div>
+    </div>
+    <div class="dash-filters">
+      <div class="field"><label for="d-dom">Domaine</label><select class="input" id="d-dom"></select></div>
+      <div class="field"><label for="d-zone">Zone</label><select class="input" id="d-zone"></select></div>
+      <div class="field"><label for="d-contrib">Contribution</label><select class="input" id="d-contrib"></select></div>
+    </div>
+    <div class="dash-kpis" id="d-kpis"></div>
+    <div class="dash-grid">
+      <div class="panel chart-card span-4"><div><h3>Répartition par pays de résidence</h3><p class="sub">Nombre de talents par pays</p></div><div class="chart tall" id="c-map"></div></div>
+      <div class="panel chart-card span-2"><div><h3>Principales villes</h3><p class="sub">Top 12</p></div><div class="chart tall" id="c-villes"></div></div>
+      <div class="panel chart-card span-3"><div><h3>Domaines d'expertise</h3><p class="sub">Part des talents par domaine</p></div><div class="chart" id="c-dom"></div></div>
+      <div class="panel chart-card span-3"><div><h3>Adhésions cumulées</h3><p class="sub">Profils validés depuis 2022</p></div><div class="chart" id="c-adh"></div></div>
+      <div class="panel chart-card span-2"><div><h3>Secteur d'activité</h3><p class="sub">Employeur actuel</p></div><div class="chart" id="c-sect"></div></div>
+      <div class="panel chart-card span-2"><div><h3>Expérience professionnelle</h3><p class="sub">Années, par tranche</p></div><div class="chart" id="c-exp"></div></div>
+      <div class="panel chart-card span-2"><div><h3>Capacités de contribution</h3><p class="sub">Déclarées par les talents</p></div><div class="chart" id="c-contrib"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== REJOINDRE ==================== -->
+<section class="view" id="v-rejoindre" data-view="rejoindre" hidden>
+  <div class="wrap section">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Demande de compte</span>
+        <h2>Rejoindre la carte des talents</h2>
+        <p>Votre demande suit le circuit de validation du RISCE. Vous recevez vos identifiants une fois le compte activé.</p>
+      </div>
+    </div>
+    <div class="workflow panel" style="margin-bottom:22px;padding:0 6px">
+      <div class="wf cur"><span class="eyebrow">Étape 1</span><b>Dépôt de la demande</b><span class="muted">Formulaire et CV</span></div>
+      <div class="wf"><span class="eyebrow">Étape 2</span><b>Vérification</b><span class="muted">Référent·e du pays de résidence</span></div>
+      <div class="wf"><span class="eyebrow">Étape 3</span><b>Validation</b><span class="muted">Commission du RISCE</span></div>
+      <div class="wf"><span class="eyebrow">Étape 4</span><b>Compte activé</b><span class="muted">Profil visible sur la carte</span></div>
+    </div>
+    <div class="form-shell">
+      <nav class="form-steps" id="form-steps" aria-label="Étapes du formulaire"></nav>
+      <form class="panel form-card" id="join-form" novalidate></form>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CONNEXION ==================== -->
+<section class="view" id="v-connexion" data-view="connexion" hidden>
+  <div class="wrap section">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Connexion</span>
+        <h2>Choisir un profil de démonstration</h2>
+        <p>Dans la version cible, la connexion passe par un fournisseur d'identité unique (Keycloak, OpenID Connect) partagé avec le site du RISCE. Ici, choisissez un rôle pour voir ce que chacun peut faire.</p>
+      </div>
+    </div>
+    <div class="roles" id="roles"></div>
+  </div>
+</section>
+
+<!-- ==================== ADMINISTRATION ==================== -->
+<section class="view" id="v-admin" data-view="admin" hidden>
+  <div class="wrap section">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Back-office</span>
+        <h2 id="admin-title">Administration</h2>
+        <p id="admin-sub">Circuit de validation des demandes, gestion des profils, référentiels et journal des actions.</p>
+      </div>
+    </div>
+    <div class="tabs" role="tablist" id="admin-tabs"></div>
+    <div id="admin-body"></div>
+  </div>
+</section>
+
+<!-- ==================== LE PROJET ==================== -->
+<section class="view" id="v-projet" data-view="projet" hidden>
+  <div class="wrap section" style="display:grid;gap:44px">
+    <div class="prose">
+      <span class="eyebrow">Note de cadrage · Commission stratégie & Commission IT</span>
+      <h2>Une brique « Nos talents » pour le site du RISCE</h2>
+      <p>Ce prototype illustre un module cartographique qui s'ajoute au site existant du RISCE, sous la forme d'un onglet « Trouver un talent ». Il ne remplace ni le site WordPress, ni l'outil de gestion des adhésions : il les complète avec une couche géographique, une banque de profils consultable et un tableau de bord.</p>
+      <p>Trois principes guident la conception : une seule identité par membre, partagée avec l'outil d'adhésion ; une localisation limitée à la ville de résidence, jamais l'adresse ; une visibilité choisie par chaque personne et des agrégats publics sans identité.</p>
+    </div>
+
+    <div>
+      <div class="section-head"><div><span class="eyebrow">Architecture cible</span><h2>Une pile 100 % open source</h2></div></div>
+      <div class="arch">
+        <div class="arch-row"><div class="lay">Site existant</div><div class="boxes">
+          <div class="abox ext"><b>risce.org</b><small>WordPress + Elementor · menu « Trouver un talent »</small></div>
+          <div class="abox ext"><b>RISCE Manager</b><small>Candidatures et adhésions · référentiel des membres</small></div>
+        </div></div>
+        <div class="arch-row"><div class="lay">Interface</div><div class="boxes">
+          <div class="abox core"><b>Application « Nos talents »</b><small>talents.risce.org · globe.gl, MapLibre GL JS, Apache ECharts</small></div>
+          <div class="abox"><b>Back-office</b><small>Validation, profils, référentiels, journal</small></div>
+        </div></div>
+        <div class="arch-row"><div class="lay">Identité</div><div class="boxes">
+          <div class="abox"><b>Keycloak</b><small>SSO OpenID Connect · rôles visiteur, membre, référent·e, admin</small></div>
+        </div></div>
+        <div class="arch-row"><div class="lay">Services</div><div class="boxes">
+          <div class="abox"><b>API REST</b><small>Django + GeoDjango (ou FastAPI) · OpenAPI</small></div>
+          <div class="abox"><b>Recherche</b><small>PostgreSQL plein texte + pg_trgm, ou Meilisearch</small></div>
+          <div class="abox"><b>Géocodage</b><small>Photon / Nominatim auto-hébergé, référentiel GeoNames</small></div>
+        </div></div>
+        <div class="arch-row"><div class="lay">Données</div><div class="boxes">
+          <div class="abox core"><b>PostgreSQL + PostGIS</b><small>Schéma <span class="mono">talents</span> relié aux membres</small></div>
+          <div class="abox"><b>MinIO</b><small>Stockage des CV (S3), liens signés</small></div>
+          <div class="abox"><b>Fonds de carte</b><small>OpenStreetMap · tuiles vectorielles PMTiles</small></div>
+        </div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-head"><div><span class="eyebrow">Modèle de données</span><h2>Ce que la base « talents » ajoute à la base du site</h2>
+        <p>En doré, les tables qui existent déjà côté RISCE (membres) et que le module référence sans les dupliquer. Le détail et le script SQL sont dans le dépôt, dossier <span class="mono">docs/</span>.</p></div></div>
+      <div class="er" id="er-model"></div>
+    </div>
+
+    <div>
+      <div class="section-head"><div><span class="eyebrow">Données personnelles</span><h2>Protection des données dès la conception</h2></div></div>
+      <div class="prose">
+        <ul>
+          <li><b>Double cadre légal.</b> Loi sénégalaise n° 2008-12 sur les données à caractère personnel (contrôle de la CDP) et RGPD pour les membres résidant dans l'Union européenne.</li>
+          <li><b>Consentement explicite et révocable</b>, horodaté, avec trois niveaux de visibilité : public, membres connectés, administrateurs seulement.</li>
+          <li><b>Localisation au centroïde de la ville.</b> La carte publique n'affiche que des effectifs par ville et par pays.</li>
+          <li><b>CV accessibles par lien signé et temporaire</b>, chaque consultation étant tracée dans le journal.</li>
+          <li><b>Droit d'accès, de rectification et d'effacement</b> exerçable depuis l'espace membre ; suppression des demandes rejetées après 12 mois.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-head"><div><span class="eyebrow">Feuille de route proposée</span><h2>Quatre phases</h2></div></div>
+      <div class="roadmap">
+        <div class="panel phase"><span class="eyebrow">Phase 1 · Cadrage</span><b>Valider le besoin</b><ul><li>Présentation au COPIL</li><li>Référentiel métiers et filières</li><li>Registre de traitement des données</li></ul></div>
+        <div class="panel phase"><span class="eyebrow">Phase 2 · Socle</span><b>Base et identité</b><ul><li>PostgreSQL/PostGIS</li><li>Keycloak relié à RISCE Manager</li><li>API et import des membres</li></ul></div>
+        <div class="panel phase"><span class="eyebrow">Phase 3 · Pilote</span><b>Une antenne test</b><ul><li>Profils de l'antenne France</li><li>Circuit de validation réel</li><li>Retours des référent·es</li></ul></div>
+        <div class="panel phase"><span class="eyebrow">Phase 4 · Ouverture</span><b>Tout le réseau</b><ul><li>Onglet sur risce.org</li><li>Tableau de bord COPIL</li><li>Mises en relation programmes</li></ul></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-head"><div><span class="eyebrow">Composants</span><h2>Licences de la pile technique</h2></div></div>
+      <div class="table-wrap">
+        <table class="data stack-table">
+          <thead><tr><th>Brique</th><th>Rôle</th><th>Licence</th><th>Dans le prototype</th></tr></thead>
+          <tbody>
+            <tr><td>globe.gl / three.js</td><td>Globe 3D de la page d'accueil</td><td>MIT</td><td>Oui</td></tr>
+            <tr><td>MapLibre GL JS</td><td>Carte interactive</td><td>BSD-3-Clause</td><td>Oui</td></tr>
+            <tr><td>Apache ECharts</td><td>Graphiques du tableau de bord</td><td>Apache-2.0</td><td>Oui</td></tr>
+            <tr><td>Natural Earth</td><td>Limites des pays</td><td>Domaine public</td><td>Oui</td></tr>
+            <tr><td>OpenStreetMap</td><td>Fond de carte détaillé</td><td>ODbL</td><td>Option</td></tr>
+            <tr><td>PostgreSQL + PostGIS</td><td>Base de données géographique</td><td>PostgreSQL / GPL-2.0</td><td>Cible</td></tr>
+            <tr><td>Keycloak</td><td>Authentification unique</td><td>Apache-2.0</td><td>Cible</td></tr>
+            <tr><td>Django + GeoDjango</td><td>API et back-office</td><td>BSD-3-Clause</td><td>Cible</td></tr>
+            <tr><td>MinIO</td><td>Stockage des CV</td><td>AGPL-3.0</td><td>Cible</td></tr>
+            <tr><td>Meilisearch</td><td>Recherche instantanée (option)</td><td>MIT</td><td>Cible</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:.8rem;margin-top:10px">Initiative contributive de Bathie Ndiaye, membre du COPIL, des commissions Stratégie et IT du RISCE. Le CEGIT est partenaire du RISCE.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<div id="modal-root"></div>
+<div class="toast" id="toast" hidden role="status"></div>
+
+<script src="assets/js/core.js"></script>
+<script src="assets/js/accueil.js"></script>
+<script src="assets/js/carte.js"></script>
+<script src="assets/js/talents.js"></script>
+<script src="assets/js/tableau.js"></script>
+<script src="assets/js/comptes.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

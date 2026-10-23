@@ -1,0 +1,380 @@
+[
+ {
+  "id": "D001",
+  "prenom": "Fatou",
+  "nom": "Diatta",
+  "genre": "F",
+  "email": "fatou.diatta@exemple.org",
+  "ville": "Rouen",
+  "pays": "FR",
+  "lat": 49.4432,
+  "lon": 1.0999,
+  "domaine": "DRO",
+  "filiere": "Administration & coopération",
+  "metier": "Chargé·e de coopération internationale",
+  "experience": 17,
+  "secteur": "Indépendant·e / cabinet",
+  "parrain": "",
+  "date": "2026-10-02",
+  "etape": "soumise",
+  "cv": true,
+  "historique": [
+   {
+    "date": "2026-10-02",
+    "action": "Demande déposée",
+    "par": "Candidat·e"
+   }
+  ]
+ },
+ {
+  "id": "D002",
+  "prenom": "Arame",
+  "nom": "Touré",
+  "genre": "F",
+  "email": "arame.toure@exemple.org",
+  "ville": "Montpellier",
+  "pays": "FR",
+  "lat": 43.6108,
+  "lon": 3.8767,
+  "domaine": "BTP",
+  "filiere": "Transport & mobilité",
+  "metier": "Ingénieur·e transport",
+  "experience": 17,
+  "secteur": "Collectivité territoriale",
+  "parrain": "",
+  "date": "2026-10-20",
+  "etape": "soumise",
+  "cv": true,
+  "historique": [
+   {
+    "date": "2026-10-20",
+    "action": "Demande déposée",
+    "par": "Candidat·e"
+   }
+  ]
+ },
+ {
+  "id": "D003",
+  "prenom": "Ramatoulaye",
+  "nom": "Mbengue",
+  "genre": "F",
+  "email": "ramatoulaye.mbengue@exemple.org",
+  "ville": "Reims",
+  "pays": "FR",
+  "lat": 49.2583,
+  "lon": 4.0317,
+  "domaine": "EDU",
+  "filiere": "Enseignement supérieur & recherche",
+  "metier": "Maître de conférences",
+  "experience": 11,
+  "secteur": "Start-up",
+  "parrain": "",
+  "date": "2026-10-03",
+  "etape": "soumise",
+  "cv": false,
+  "historique": [
+   {
+    "date": "2026-10-03",
+    "action": "Demande déposée",
+    "par": "Candidat·e"
+   }
+  ]
+ },
+ {
+  "id": "D004",
+  "prenom": "Marème",
+  "nom": "Sow",
+  "genre": "F",
+  "email": "mareme.sow@exemple.org",
+  "ville": "Lisbonne",
+  "pays": "PT",
+  "lat": 38.7223,
+  "lon": -9.1393,
+  "domaine": "EDU",
+  "filiere": "Enseignement supérieur & recherche",
+  "metier": "Maître de conférences",
+  "experience": 15,
+  "secteur": "Start-up",
+  "parrain": "",
+  "date": "2026-10-07",
+  "etape": "verif_referent",
+  "cv": true,
+  "historique": [
+   {
+    "date": "2026-10-07",
+    "action": "Demande déposée",
+    "par": "Candidat·e"
+   }
+  ]
+ },
+ {
+  "id": "D005",
+  "prenom": "Ibrahima",
+  "nom": "Kane",
+  "genre": "H",
+  "email": "ibrahima.kane@exemple.org",
+  "ville": "Bruxelles",
+  "pays": "BE",
+  "lat": 50.8503,
+  "lon": 4.3517,
+  "domaine": "DRO",
+  "filiere": "Administration & coopération",
+  "metier": "Diplomate",
+  "experience": 21,
+  "secteur": "Indépendant·e / cabinet",
+  "parrain": "",
+  "date": "2026-10-17",
+  "etape": "verif_referent",
+  "cv": false,
+  "historique": [
+   {
+    "date": "2026-10-17",
+    "action": "Demande déposée",
+    "par": "Candidat·e"
+   }
+  ]
+ },
+ {
+  "id": "D006",
+  "prenom": "Ibrahima",
+  "nom": "Tall",
+  "genre": "H",
+  "email": "ibrahima.tall@exemple.org",
+  "ville": "Turin",
+  "pays": "IT",
+  "lat": 45.0703,
+  "lon": 7.6869,
+  "domaine": "GEO",
+  "filiere": "Aménagement & urbanisme",
+  "metier": "Urbaniste",
+  "experience": 22,
+  "secteur": "Start-up",
+  "parrain": "Ramatoulaye Mendy",
+  "date": "2026-10-21",
+  "etape": "verif_referent",
+  "cv": true,
+  "historique": [
+   {
+    "date": "2026-10-21",
+    "action": "Demande déposée",
+    "par": "Candidat·e"
+   }
+  ]
+ },
+ {
+  "id": "D007",
+  "prenom": "Penda",
+  "nom": "Mbengue",
+  "genre": "F",
+  "email": "penda.mbengue@exemple.org",
+  "ville": "Houston",
+  "pays": "US",
+  "lat": 29.7604,
+  "lon": -95.3698,
+  "domaine": "DRO",
+  "filiere": "Administration & coopération",
+  "metier": "Diplomate",
+  "experience": 4,
+  "secteur": "PME / ETI",
+  "parrain": "",
+  "date": "2026-10-08",
+  "etape": "validation_commission",
+  "cv": true,
+  "historique": [
+   {
+    "date": "2026-10-08",
+    "action": "Demande déposée",
+    "par": "Candidat·e"
+   }
+  ]
+ },
+ {
+  "id": "D008",
+  "prenom": "Assane",
+  "nom": "Dramé",
+  "genre": "H",
+  "email": "assane.drame@exemple.org",
+  "ville": "Montréal",
+  "pays": "CA",
+  "lat": 45.5017,
+  "lon": -73.5673,
+  "domaine": "COM",
+  "filiere": "Médias",
+  "metier": "Journaliste",
+  "experience": 17,
+  "secteur": "Grand groupe",
+  "parrain": "",
+  "date": "2026-10-22",
+  "etape": "validation_commission",
+  "cv": true,
+  "historique": [
+   {
+    "date": "2026-10-22",
+    "action": "Demande déposée",
+    "par": "Candidat·e"
+   }
+  ]
+ },
+ {
+  "id": "D009",
+  "prenom": "Mariama",
+  "nom": "Touré",
+  "genre": "F",
+  "email": "mariama.toure@exemple.org",
+  "ville": "Madrid",
+  "pays": "ES",
+  "lat": 40.4168,
+  "lon": -3.7038,
+  "domaine": "DRO",
+  "filiere": "Droit",
+  "metier": "Avocat·e",
+  "experience": 9,
+  "secteur": "PME / ETI",
+  "parrain": "Arame Sène",
+  "date": "2026-10-14",
+  "etape": "complement",
+  "cv": true,
+  "historique": [
+   {
+    "date": "2026-10-14",
+    "action": "Demande déposée",
+    "par": "Candidat·e"
+   }
+  ]
+ },
+ {
+  "id": "D010",
+  "prenom": "Astou",
+  "nom": "Kane",
+  "genre": "F",
+  "email": "astou.kane@exemple.org",
+  "ville": "Amsterdam",
+  "pays": "NL",
+  "lat": 52.3676,
+  "lon": 4.9041,
+  "domaine": "NUM",
+  "filiere": "Développement logiciel",
+  "metier": "Lead développeur·se",
+  "experience": 2,
+  "secteur": "Université / recherche",
+  "parrain": "",
+  "date": "2026-10-05",
+  "etape": "soumise",
+  "cv": false,
+  "historique": [
+   {
+    "date": "2026-10-05",
+    "action": "Demande déposée",
+    "par": "Candidat·e"
+   }
+  ]
+ },
+ {
+  "id": "D011",
+  "prenom": "Daba",
+  "nom": "Thiam",
+  "genre": "F",
+  "email": "daba.thiam@exemple.org",
+  "ville": "Genève",
+  "pays": "CH",
+  "lat": 46.2044,
+  "lon": 6.1432,
+  "domaine": "COM",
+  "filiere": "Médias",
+  "metier": "Journaliste",
+  "experience": 6,
+  "secteur": "Indépendant·e / cabinet",
+  "parrain": "",
+  "date": "2026-10-12",
+  "etape": "verif_referent",
+  "cv": false,
+  "historique": [
+   {
+    "date": "2026-10-12",
+    "action": "Demande déposée",
+    "par": "Candidat·e"
+   }
+  ]
+ },
+ {
+  "id": "D012",
+  "prenom": "Coumba",
+  "nom": "Sy",
+  "genre": "F",
+  "email": "coumba.sy@exemple.org",
+  "ville": "Bruxelles",
+  "pays": "BE",
+  "lat": 50.8503,
+  "lon": 4.3517,
+  "domaine": "EDU",
+  "filiere": "Formation",
+  "metier": "Ingénieur·e pédagogique",
+  "experience": 18,
+  "secteur": "Indépendant·e / cabinet",
+  "parrain": "",
+  "date": "2026-10-11",
+  "etape": "validation_commission",
+  "cv": true,
+  "historique": [
+   {
+    "date": "2026-10-11",
+    "action": "Demande déposée",
+    "par": "Candidat·e"
+   }
+  ]
+ },
+ {
+  "id": "D013",
+  "prenom": "Babacar",
+  "nom": "Sow",
+  "genre": "H",
+  "email": "babacar.sow@exemple.org",
+  "ville": "Madrid",
+  "pays": "ES",
+  "lat": 40.4168,
+  "lon": -3.7038,
+  "domaine": "EDU",
+  "filiere": "Enseignement supérieur & recherche",
+  "metier": "Maître de conférences",
+  "experience": 2,
+  "secteur": "Start-up",
+  "parrain": "",
+  "date": "2026-10-15",
+  "etape": "soumise",
+  "cv": true,
+  "historique": [
+   {
+    "date": "2026-10-15",
+    "action": "Demande déposée",
+    "par": "Candidat·e"
+   }
+  ]
+ },
+ {
+  "id": "D014",
+  "prenom": "Aïssatou",
+  "nom": "Sy",
+  "genre": "F",
+  "email": "aissatou.sy@exemple.org",
+  "ville": "Atlanta",
+  "pays": "US",
+  "lat": 33.749,
+  "lon": -84.388,
+  "domaine": "GEO",
+  "filiere": "Aménagement & urbanisme",
+  "metier": "Chargé·e de mission aménagement",
+  "experience": 8,
+  "secteur": "ONG / association",
+  "parrain": "",
+  "date": "2026-10-11",
+  "etape": "rejetee",
+  "cv": true,
+  "historique": [
+   {
+    "date": "2026-10-11",
+    "action": "Demande déposée",
+    "par": "Candidat·e"
+   }
+  ]
+ }
+]
