@@ -3,7 +3,7 @@
    (validation, inscription…) sont conservées dans le navigateur (localStorage). */
 (function () {
   const RT = (window.RT = {});
-  const LS_KEY = 'risce-talents-demo-v1';
+  const LS_KEY = 'risce-talents-demo-v2';
 
   // ---------------------------------------------------------------- utilitaires
   RT.esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -27,9 +27,9 @@
     clear() { try { localStorage.removeItem(LS_KEY); } catch (e) {} },
   };
 
-  RT.state = { role: 'visiteur', talents: [], demandes: [], journal: [], ref: null, focus: null };
+  RT.state = { role: 'visiteur', talents: [], demandes: [], journal: [], ref: null, referents: [], focus: null };
 
-  RT.save = () => ls.set({ role: RT.state.role, talents: RT.state.talents, demandes: RT.state.demandes, journal: RT.state.journal });
+  RT.save = () => ls.set({ role: RT.state.role, talents: RT.state.talents, demandes: RT.state.demandes, journal: RT.state.journal, ref: RT.state.ref, referents: RT.state.referents });
   RT.resetDemo = () => { ls.clear(); location.hash = '#accueil'; location.reload(); };
   RT.log = (action, cible) => {
     RT.state.journal.unshift({ date: new Date().toISOString(), qui: RT.ROLES[RT.state.role].nom, action, cible });
@@ -42,6 +42,12 @@
     membre: { nom: 'Aminata Sarr', init: 'AS', titre: 'Membre', desc: 'Membre actif·ve connecté·e', droits: ['Fiches complètes des membres', 'Consultation des CV', 'Contact via la plateforme'] },
     referent: { nom: 'Ousmane Diallo', init: 'OD', titre: 'Référent·e pays', pays: 'FR', desc: 'Référent de l\'antenne France', droits: ['Tout ce que voit un membre', 'Vérification des demandes de son pays', 'Demande de compléments'] },
     admin: { nom: 'Admin RISCE', init: 'AR', titre: 'Administrateur·rice', desc: 'Bureau / commission IT', droits: ['Validation finale des comptes', 'Gestion des profils et visibilités', 'Référentiels, journal, exports'] },
+  };
+  // Comptes de test (prototype uniquement ; la cible passe par Keycloak)
+  RT.ACCOUNTS = {
+    admin: { pwd: 'admin', role: 'admin' },
+    referent: { pwd: 'referent', role: 'referent' },
+    membre: { pwd: 'membre', role: 'membre' },
   };
   RT.isMember = () => RT.state.role !== 'visiteur';
   RT.isStaff = () => RT.state.role === 'referent' || RT.state.role === 'admin';
@@ -214,6 +220,7 @@
           <dt>Compétences</dt><dd><div class="chips">${comp}</div></dd>
           <dt>Souhaite contribuer</dt><dd><div class="chips">${contribs}</div></dd>
         </dl>
+        ${t.entreprise ? RT.entrepriseBlock(t) : ''}
         ${member ? `
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             ${t.cv ? '<button class="btn btn-primary" type="button" data-cv>Consulter le CV</button>' : '<span class="pill info">CV non déposé</span>'}
@@ -222,10 +229,32 @@
         : `<p class="lock-note">Le nom complet, le CV et la mise en relation sont réservés aux membres connectés. <a href="#connexion" data-close>Se connecter</a> ou <a href="#rejoindre" data-close>rejoindre le réseau</a>.</p>`}
       </div>`, (back, close) => {
       const cv = back.querySelector('[data-cv]');
-      if (cv) cv.addEventListener('click', () => { RT.log('Consultation de CV', `${t.prenom} ${t.nom} (${t.id})`); RT.openCV(t); });
+      if (cv) cv.addEventListener('click', () => { const ci = RT.cvInfo(t); if (ci) ci.vues++; RT.log('Consultation de CV', `${t.prenom} ${t.nom} (${t.id})`); RT.openCV(t); });
       const ct = back.querySelector('[data-contact]');
       if (ct) ct.addEventListener('click', () => { RT.log('Demande de mise en relation', `${t.prenom} ${t.nom} (${t.id})`); close(); RT.toast(`Demande de mise en relation transmise à ${t.prenom}.`); });
     });
+  };
+
+  RT.entrepriseBlock = (t) => {
+    const e = t.entreprise;
+    return `<div class="ent-block">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:start;flex-wrap:wrap">
+        <div><span class="eyebrow">${RT.esc(e.type)}</span><h3 style="font-size:1.3rem">${RT.esc(e.nom)}</h3></div>
+        <span class="pill info">${RT.esc(e.stade)}</span>
+      </div>
+      <p class="muted" style="font-size:.9rem">${RT.esc(e.activite.charAt(0).toUpperCase() + e.activite.slice(1))}${e.annee ? ` · depuis ${e.annee}` : ''} · ${RT.esc(e.senegal)}</p>
+      <div class="chips"><span class="muted" style="font-size:.75rem;align-self:center">Recherche :</span>${e.besoins.map((x) => `<span class="chip need">${RT.esc(x)}</span>`).join('')}</div>
+    </div>`;
+  };
+
+  // Métadonnées du CV (dans la cible : table talents.document + objet MinIO)
+  RT.cvInfo = (t) => {
+    if (!t.cv) return null;
+    if (!t.cvInfo) {
+      const seed = [...t.id].reduce((a, c) => a + c.charCodeAt(0), 0);
+      t.cvInfo = { fichier: `CV_${RT.norm(t.prenom).replace(/\W+/g, '-')}_${RT.norm(t.nom).replace(/\W+/g, '-')}.pdf`, depose: t.adhesion, taille: 120 + (seed * 37) % 680, vues: seed % 14 };
+    }
+    return t.cvInfo;
   };
 
   RT.openCV = (t) => {
@@ -252,8 +281,9 @@
     const [topo, topoLight, ref, talents, demandes] = await Promise.all(
       ['data/pays-50m.topo.json', 'data/pays-110m.topo.json', 'data/referentiels.json', 'data/talents.json', 'data/demandes.json'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); }))
     );
-    RT.state.ref = ref;
     const saved = ls.get();
+    RT.state.ref = saved && saved.ref ? saved.ref : ref;
+    RT.state.referents = saved && saved.referents ? saved.referents : [{ nom: 'Ousmane Diallo', pays: 'FR', login: 'referent' }, { nom: 'Coumba Faye', pays: 'CA', login: '' }, { nom: 'Pape Mbaye', pays: 'US', login: '' }];
     RT.state.talents = saved && saved.talents ? saved.talents : talents;
     RT.state.demandes = saved && saved.demandes ? saved.demandes : demandes;
     RT.state.journal = saved && saved.journal ? saved.journal : [];

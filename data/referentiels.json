@@ -416,6 +416,28 @@
   "Membre fondateur",
   "Membre d'honneur"
  ],
+ "entrepreneuriat": {
+  "types": [
+   "Chef·fe d'entreprise",
+   "Fondateur·rice de start-up",
+   "Indépendant·e / consultant·e",
+   "Porteur·se de projet"
+  ],
+  "stades": [
+   "Idée / amorçage",
+   "Création (moins de 2 ans)",
+   "Croissance",
+   "Entreprise établie"
+  ],
+  "besoins": [
+   "Financement",
+   "Partenaires au Sénégal",
+   "Mentorat",
+   "Recrutement",
+   "Accès au marché",
+   "Visibilité"
+  ]
+ },
  "villes": [
   {
    "nom": "Paris",

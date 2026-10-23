@@ -2,7 +2,7 @@
 (function () {
   const RT = window.RT;
   const PAGE = 24;
-  const D = { q: '', dom: '', fil: '', met: '', pays: '', ville: '', sect: '', niv: '', exp: 0, lang: '', contrib: '', cv: false, sort: 'pertinence', page: 1 };
+  const D = { q: '', dom: '', fil: '', met: '', pays: '', ville: '', sect: '', niv: '', exp: 0, lang: '', contrib: '', cv: false, ent: false, sort: 'pertinence', page: 1 };
 
   RT.presetDirectory = (p) => {
     Object.assign(D, { q: '', dom: '', fil: '', met: '', pays: '', ville: '', page: 1 });
@@ -14,7 +14,7 @@
 
   function haystack(t) {
     const d = RT.dom(t.domaine);
-    return RT.norm([RT.isMember() ? t.prenom + ' ' + t.nom : t.prenom, t.metier, t.filiere, d.libelle, t.competences.join(' '), t.ville, RT.paysNom(t.pays), t.secteur, t.langues.join(' '), t.contributions.join(' ')].join(' '));
+    return RT.norm([RT.isMember() ? t.prenom + ' ' + t.nom : t.prenom, t.metier, t.filiere, d.libelle, t.competences.join(' '), t.ville, RT.paysNom(t.pays), t.secteur, t.langues.join(' '), t.contributions.join(' '), t.entreprise ? t.entreprise.nom + ' ' + t.entreprise.activite + ' entrepreneur' : ''].join(' '));
   }
 
   function results() {
@@ -23,7 +23,7 @@
       && (!D.dom || t.domaine === D.dom) && (!D.fil || t.filiere === D.fil) && (!D.met || t.metier === D.met)
       && (!D.pays || t.pays === D.pays) && (!D.ville || t.ville === D.ville) && (!D.sect || t.secteur === D.sect)
       && (!D.niv || t.niveau === D.niv) && t.experience >= D.exp && (!D.lang || t.langues.includes(D.lang))
-      && (!D.contrib || t.contributions.includes(D.contrib)) && (!D.cv || t.cv));
+      && (!D.contrib || t.contributions.includes(D.contrib)) && (!D.cv || t.cv) && (!D.ent || t.entreprise));
     let scored = list.map((t) => {
       if (!terms.length) return [t, 1];
       const h = haystack(t); let s = 0;
@@ -52,14 +52,14 @@
     RT.fillSelect(RT.$('#f-lang'), ref.langues, 'Toutes', D.lang);
     RT.fillSelect(RT.$('#f-contrib'), ref.contributions, 'Indifférent', D.contrib);
     RT.$('#f-exp').value = D.exp; RT.$('#f-exp-v').textContent = D.exp;
-    RT.$('#f-cv').checked = D.cv; RT.$('#dir-q').value = D.q; RT.$('#dir-sort').value = D.sort;
+    RT.$('#f-cv').checked = D.cv; RT.$('#f-ent').checked = D.ent; RT.$('#dir-q').value = D.q; RT.$('#dir-sort').value = D.sort;
   }
 
   function card(t) {
     const d = RT.dom(t.domaine);
     return `<button class="panel tcard" type="button" data-id="${t.id}">
       <div class="top">${RT.avatarHtml(t)}<div style="min-width:0"><div class="who">${RT.esc(RT.displayName(t))}</div><div class="where">${RT.esc(t.ville)} · ${RT.esc(RT.paysNom(t.pays))}</div></div></div>
-      <div class="what">${RT.esc(t.metier)}</div>
+      <div class="what">${RT.esc(t.metier)}${t.entreprise ? `<br><span class="tag-ent">◆ ${RT.esc(t.entreprise.type)}</span>` : ''}</div>
       <div class="chips"><span class="chip"><i class="dot" style="background:${d.couleur}"></i>${RT.esc(t.filiere)}</span></div>
       <div class="foot"><span class="num">${t.experience} ans d'exp.</span><span>${t.cv ? (RT.isMember() ? 'CV disponible' : 'CV · membres') : 'Sans CV'}</span></div>
     </button>`;
@@ -99,9 +99,10 @@
     bind('#f-sect', 'sect'); bind('#f-niv', 'niv'); bind('#f-lang', 'lang'); bind('#f-contrib', 'contrib'); bind('#dir-sort', 'sort');
     RT.$('#f-exp').addEventListener('input', (e) => { D.exp = +e.target.value; RT.$('#f-exp-v').textContent = D.exp; D.page = 1; render(); });
     RT.$('#f-cv').addEventListener('change', (e) => { D.cv = e.target.checked; D.page = 1; render(); });
+    RT.$('#f-ent').addEventListener('change', (e) => { D.ent = e.target.checked; D.page = 1; render(); });
     RT.$('#dir-form').addEventListener('submit', (e) => { e.preventDefault(); D.q = RT.$('#dir-q').value; D.page = 1; render(); });
     RT.$('#dir-q').addEventListener('input', (e) => { if (!e.target.value) { D.q = ''; render(); } });
-    RT.$('#f-reset').onclick = () => { Object.assign(D, { q: '', dom: '', fil: '', met: '', pays: '', ville: '', sect: '', niv: '', exp: 0, lang: '', contrib: '', cv: false, page: 1 }); syncControls(); render(); };
+    RT.$('#f-reset').onclick = () => { Object.assign(D, { q: '', dom: '', fil: '', met: '', pays: '', ville: '', sect: '', niv: '', exp: 0, lang: '', contrib: '', cv: false, ent: false, page: 1 }); syncControls(); render(); };
     RT.$('#dir-cards').onclick = (e) => { const c = e.target.closest('[data-id]'); if (c) RT.openProfile(RT.state.talents.find((t) => t.id === c.dataset.id)); };
     RT.$('#dir-pager').onclick = (e) => { const b = e.target.closest('[data-p]'); if (b && !b.disabled) { D.page = +b.dataset.p; render(); RT.$('#v-talents').scrollIntoView({ behavior: 'smooth' }); } };
     RT.$('#dir-export').onclick = exportCsv;

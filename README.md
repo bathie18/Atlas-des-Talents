@@ -1,6 +1,8 @@
-# RISCE · Nos talents
+# RISCE Talents
 
-**Prototype de plateforme cartographique des talents de la diaspora sénégalaise**, destiné à devenir l'onglet « Trouver un talent » du site du [RISCE](https://www.risce.org/) (Réseau International des Sénégalais Cadres et Entrepreneurs de l'Extérieur).
+> Dépôt *Atlas des Talents* · démonstration en ligne : https://bathie18.github.io/Atlas-des-Talents/
+
+**Prototype de plateforme cartographique des talents et des entrepreneurs de la diaspora sénégalaise**, destiné à devenir l'onglet « Trouver un talent » du site du [RISCE](https://www.risce.org/) (Réseau International des Sénégalais Cadres et Entrepreneurs de l'Extérieur).
 
 > *L'intelligence collective au service de la communauté.*
 
@@ -14,22 +16,32 @@ Initiative contributive de Bathie Ndiaye (membre du COPIL, commissions Stratégi
 |---|---|
 | **Accueil** | Globe 3D animé (arcs convergeant vers Dakar), recherche d'un pays ou d'une ville avec survol automatique de son emprise, phrase d'accroche animée, chiffres clés, domaines |
 | **Carte des talents** | Carte MapLibre : effectifs par pays puis par ville en zoomant, filtres domaine / filière / contribution / langue, liste des profils de la sélection |
+| **Entrepreneurs** | Vitrine des chefs d'entreprise, fondateurs, indépendants et porteurs de projet : sélection « à la une », filtres par profil, stade, besoin et lien avec le Sénégal |
 | **Trouver un talent** | Banque de profils et de CV : mot-clé, recherche avancée (domaine, filière, métier, pays, ville, secteur, niveau, expérience, langue, contribution, CV), tri, pagination |
 | **Tableau de bord** | Choroplèthe mondiale, top villes, domaines, adhésions cumulées, secteurs, expérience, capacités de contribution |
 | **Rejoindre** | Demande de compte en 4 étapes, avec consentement et choix de visibilité |
-| **Connexion** | Profils de démonstration : visiteur, membre, référent·e pays, administrateur·rice |
-| **Administration** | Circuit de validation (kanban), gestion des profils et de leur visibilité, référentiels, journal des actions |
+| **Connexion** | Bouton en haut à droite ; comptes de test ci-dessous |
+| **Administration** | Vue d'ensemble, circuit de validation, profils (modification, visibilité, suspension, suppression), banque de CV (consulter, remplacer, retirer, relancer), entrepreneurs à la une, domaines / filières / métiers, comptes et référent·es pays, journal |
+
+### Comptes de test
+
+| Identifiant | Mot de passe | Rôle |
+|---|---|---|
+| `admin` | `admin` | Administrateur·rice : tout le back-office |
+| `referent` | `referent` | Référent·e France : demandes, profils et CV de son pays |
+| `membre` | `membre` | Membre : fiches complètes et CV |
 | **Le projet** | Note de cadrage : architecture cible, modèle de données, protection des données, feuille de route |
 
-Les actions effectuées (demandes, validations, suspensions) sont conservées dans le navigateur. Le lien « Réinitialiser la démo » restaure l'état initial.
+Les actions effectuées pendant une démonstration (demandes, validations, modifications de profils, de CV ou de référentiels) sont conservées dans le navigateur de la personne qui teste. Le bouton « Remettre la démo à zéro », en pied de page, efface ces modifications et restaure les données fictives d'origine : utile avant une présentation au COPIL.
 
 ### Scénario de démonstration conseillé (5 minutes)
 1. Accueil : taper « Canada », puis « Lyon » ; le globe survole l'emprise et affiche la synthèse.
 2. « Voir sur la carte », zoomer sur l'Europe, cliquer un cercle de ville.
 3. Trouver un talent : chercher « PostGIS » ou filtrer *Santé › Médecine* ; ouvrir une fiche en visiteur (identité masquée).
 4. Rejoindre : déposer une demande.
-5. Connexion › Administrateur·rice : faire avancer la demande jusqu'à « Activer le compte » ; le profil apparaît sur la carte.
-6. Le projet : architecture et modèle de données.
+5. Se connecter avec `admin` / `admin` : faire avancer la demande jusqu'à « Activer le compte » ; le profil apparaît sur la carte.
+6. Entrepreneurs : parcourir la vitrine, puis mettre une entreprise à la une depuis l'administration.
+7. Le projet : architecture et modèle de données.
 
 ## Publier sur GitHub Pages
 
@@ -54,7 +66,9 @@ assets/js/accueil.js       globe globe.gl et recherche géographique
 assets/js/carte.js         carte MapLibre
 assets/js/talents.js       annuaire et recherche avancée
 assets/js/tableau.js       tableau de bord ECharts
-assets/js/comptes.js       demande de compte, connexion, back-office
+assets/js/entrepreneurs.js vitrine des entrepreneurs
+assets/js/comptes.js       demande de compte et connexion
+assets/js/admin.js         back-office
 assets/js/main.js          démarrage et navigation
 data/                      pays (Natural Earth, noms français), référentiels, talents et demandes fictifs
 docs/ARCHITECTURE.md       architecture cible et intégration au site WordPress

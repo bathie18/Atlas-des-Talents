@@ -49,9 +49,9 @@
     const pays = new Set(list.map((t) => t.pays)).size;
     const femmes = list.length ? Math.round((list.filter((t) => t.genre === 'F').length / list.length) * 100) : 0;
     const expMoy = list.length ? (list.reduce((s, t) => s + t.experience, 0) / list.length).toFixed(1).replace('.', ',') : '0';
-    const pending = RT.state.demandes.filter((d) => !['activee', 'rejetee'].includes(d.etape)).length;
+    const ents = list.filter((t) => t.entreprise).length;
     RT.$('#d-kpis').innerHTML = [
-      [RT.fmt(list.length), 'talents'], [pays, 'pays'], [femmes + ' %', 'de femmes'], [expMoy + ' ans', 'd\'expérience moyenne'], [pending, 'demandes en cours'],
+      [RT.fmt(list.length), 'talents'], [pays, 'pays'], [femmes + ' %', 'de femmes'], [expMoy + ' ans', 'd\'expérience moyenne'], [ents, 'entrepreneurs et indépendants'],
     ].map(([n, l]) => `<div class="panel dash-kpi"><b>${n}</b><span>${l}</span></div>`).join('');
 
     // Choroplèthe
@@ -74,6 +74,9 @@
     hbar('c-villes', [...RT.countBy(list, (t) => t.ville)].sort((a, c) => c[1] - a[1]).slice(0, 12), b, 'talents');
     hbar('c-dom', [...RT.countBy(list, (t) => RT.dom(t.domaine).libelle)].sort((a, c) => c[1] - a[1]), b, 'talents');
     hbar('c-sect', [...RT.countBy(list, (t) => t.secteur)].sort((a, c) => c[1] - a[1]), b, 'talents');
+    const el = list.filter((t) => t.entreprise);
+    hbar('c-stade', RT.state.ref.entrepreneuriat.stades.map((st) => [st, el.filter((t) => t.entreprise.stade === st).length]), b, 'entreprises et projets');
+    hbar('c-besoins', [...RT.countBy(el, (t) => t.entreprise.besoins)].sort((a, c) => c[1] - a[1]), b, 'entrepreneurs');
     hbar('c-contrib', [...RT.countBy(list, (t) => t.contributions)].sort((a, c) => c[1] - a[1]), b, 'talents');
 
     // Expérience : histogramme

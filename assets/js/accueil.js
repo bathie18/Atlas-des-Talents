@@ -62,6 +62,14 @@
     front.innerHTML = defs.replace(/rb-/g, 'rf-') + BANDS.map((b, i) => band(b, i, 'front')).join('').replace(/rb-/g, 'rf-');
   }
 
+  // Altitude de caméra pour que le globe et ses rubans tiennent entièrement dans la zone
+  function fitAltitude(el) {
+    const h = el.clientHeight || 500, w = el.clientWidth || 800;
+    const R = Math.min(0.4 * h, 0.36 * w);
+    const x = (2 * R * Math.tan((25 * Math.PI) / 180)) / h;
+    return Math.max(1.2, 1 / Math.sin(Math.atan(x)) - 1);
+  }
+
   RT.initGlobe = () => {
     const el = RT.$('#globe');
     if (typeof Globe !== 'function') { el.innerHTML = '<div class="globe-fallback">Le globe nécessite WebGL et une connexion pour charger globe.gl.</div>'; return; }
@@ -117,7 +125,7 @@
       ctl.autoRotate = !matchMedia('(prefers-reduced-motion: reduce)').matches;
       ctl.autoRotateSpeed = 0.35; ctl.enableZoom = true; ctl.minDistance = 120; ctl.maxDistance = 650;
       el.addEventListener('pointerdown', () => (ctl.autoRotate = false), { once: true });
-      world.pointOfView({ lat: 24, lng: -16, altitude: innerWidth < 600 ? 2.4 : 1.7 });
+      world.pointOfView({ lat: 22, lng: -16, altitude: fitAltitude(el) });
       const size = () => { world.width(el.clientWidth).height(el.clientHeight); drawRibbons(); };
       world.onZoom(() => drawRibbons());
       size(); addEventListener('resize', size);

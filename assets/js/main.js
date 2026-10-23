@@ -1,7 +1,7 @@
 /* Démarrage et navigation par ancres (#accueil, #carte, #talents…). */
 (function () {
   const RT = window.RT;
-  const VIEWS = ['accueil', 'carte', 'talents', 'tableau', 'rejoindre', 'connexion', 'admin', 'projet'];
+  const VIEWS = ['accueil', 'carte', 'talents', 'entrepreneurs', 'tableau', 'rejoindre', 'connexion', 'admin', 'projet'];
 
   // Modèle de données affiché dans « Le projet » (détail complet : docs/MODELE_DONNEES.md)
   const ER = [
@@ -13,6 +13,8 @@
     ['talent_competence', 'talents', false, ['fk profil_id', 'fk competence_id', 'niveau']],
     ['talent_langue', 'talents', false, ['fk profil_id', 'langue (ISO 639)', 'niveau (CECRL)']],
     ['talent_contribution', 'talents', false, ['fk profil_id', 'fk type_contribution', 'fk programme (PPED, GBTC, PDC)', 'disponibilite']],
+    ['entreprise', 'talents', false, ['pk id', 'fk profil_id', 'type (chef·fe d\'entreprise, indépendant·e…)', 'nom, activite', 'stade, annee_creation', 'lien_senegal', 'a_la_une, publie_le']],
+    ['entreprise_besoin', 'talents', false, ['fk entreprise_id', 'besoin (financement, partenaires…)']],
     ['experience / diplome', 'talents', false, ['pk id', 'fk profil_id', 'intitule, organisation', 'debut, fin', 'fk pays_iso2']],
     ['document', 'talents', false, ['pk id', 'fk profil_id', 'type (CV…)', 'cle_objet_minio', 'sha256, taille', 'depose_le']],
     ['demande_compte', 'workflow', false, ['pk id', 'fk membre_id (nullable)', 'donnees_soumises (jsonb)', 'etape', 'fk referent_id', 'cree_le']],
@@ -50,9 +52,8 @@
       document.querySelector('main').innerHTML = `<div class="wrap section"><div class="empty">Les données n'ont pas pu être chargées (${RT.esc(e.message)}). Ouvrez le prototype via un serveur web (GitHub Pages, ou <span class="mono">python3 -m http.server</span>) plutôt qu'en double-cliquant sur le fichier.</div></div>`;
       return;
     }
-    RT.initHome(); RT.initCarte(); RT.initTalents(); RT.initTableau(); RT.initJoin(); RT.initLogin(); RT.initAdmin();
+    RT.initHome(); RT.initCarte(); RT.initTalents(); RT.initEntrepreneurs(); RT.initTableau(); RT.initJoin(); RT.initLogin(); RT.initAdmin();
     RT.setRole(RT.state.role);
-    RT.$('#role-chip').onclick = () => (location.hash = '#connexion');
     RT.$('#reset-demo').onclick = RT.resetDemo;
     addEventListener('hashchange', show);
     show();

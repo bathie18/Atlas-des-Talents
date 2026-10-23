@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>RISCE Nos talents</title>
+<title>RISCE Talents</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Prototype de plateforme cartographique des talents de la diaspora sénégalaise pour le RISCE.">
+<meta name="description" content="RISCE Talents : la carte des talents et des entrepreneurs de la diaspora sénégalaise.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
@@ -22,30 +22,33 @@
 
 <header class="topbar">
   <div class="wrap topbar-in">
-    <a class="brand" href="#accueil" aria-label="RISCE, Nos talents, accueil">
+    <a class="brand" href="#accueil" aria-label="RISCE Talents, accueil">
       <img src="assets/img/risce-globe.png" alt="" width="38" height="38">
-      <span class="word"><b>RISCE</b><span>Nos talents</span></span>
+      <span class="word"><b>RISCE</b><span>Talents</span></span>
     </a>
     <nav class="nav" aria-label="Navigation principale">
       <a href="#accueil">Accueil</a>
       <a href="#carte">Carte des talents</a>
       <a href="#talents">Trouver un talent</a>
+      <a href="#entrepreneurs">Entrepreneurs</a>
       <a href="#tableau">Tableau de bord</a>
       <a href="#rejoindre">Rejoindre</a>
       <a href="#projet">Le projet</a>
       <a href="#admin" class="admin-link" id="nav-admin" hidden>Administration</a>
     </nav>
-    <button class="role-chip" id="role-chip" type="button" aria-label="Changer de profil de démonstration">
-      <span class="av" id="role-av">V</span><span class="lbl" id="role-lbl">Visiteur</span>
-    </button>
+    <div class="account">
+      <a class="btn btn-primary btn-sm" href="#connexion" id="login-btn">Se connecter</a>
+      <button class="role-chip" id="role-chip" type="button" hidden aria-haspopup="true" aria-expanded="false" aria-controls="user-menu">
+        <span class="av" id="role-av"></span><span class="lbl" id="role-lbl"></span>
+      </button>
+      <div class="user-menu panel" id="user-menu" hidden>
+        <div class="um-head"><b id="um-name"></b><span class="muted" id="um-role"></span></div>
+        <a href="#admin" id="um-admin">Administration</a>
+        <button type="button" id="logout">Se déconnecter</button>
+      </div>
+    </div>
   </div>
 </header>
-<div class="demo-banner">
-  <div class="wrap">
-    <span><b>Prototype de démonstration</b> · profils fictifs, aucune donnée réelle de membre</span>
-    <button type="button" id="reset-demo">Réinitialiser la démo</button>
-  </div>
-</div>
 
 <main>
 <!-- ==================== ACCUEIL ==================== -->
@@ -114,6 +117,14 @@
     </div>
   </div>
 
+  <div class="wrap" style="padding-bottom:44px">
+    <div class="section-head" style="margin-bottom:12px">
+      <div><span class="eyebrow">Entrepreneuriat</span><h2>Entrepreneurs à la une</h2></div>
+      <a class="btn btn-ghost btn-sm" href="#entrepreneurs">Voir la vitrine</a>
+    </div>
+    <div class="une-grid" id="home-une"></div>
+  </div>
+
   <div class="wrap" style="padding-bottom:48px">
     <div class="cta-band">
       <div>
@@ -167,19 +178,21 @@
     </div>
     <div class="dir-layout">
       <aside class="panel dir-filters" aria-label="Recherche avancée">
-        <span class="eyebrow">Recherche avancée</span>
+        <div class="filters-head"><span class="eyebrow">Recherche avancée</span><button class="linkbtn" type="button" id="f-reset">Tout effacer</button></div>
         <div class="field"><label for="f-dom">Domaine</label><select class="input" id="f-dom"></select></div>
-        <div class="field"><label for="f-fil">Filière</label><select class="input" id="f-fil"></select></div>
-        <div class="field"><label for="f-met">Métier</label><select class="input" id="f-met"></select></div>
-        <div class="field"><label for="f-pays">Pays</label><select class="input" id="f-pays"></select></div>
-        <div class="field"><label for="f-ville">Ville</label><select class="input" id="f-ville"></select></div>
-        <div class="field"><label for="f-sect">Secteur</label><select class="input" id="f-sect"></select></div>
-        <div class="field"><label for="f-niv">Niveau d'études</label><select class="input" id="f-niv"></select></div>
+        <div class="f2">
+          <div class="field"><label for="f-fil">Filière</label><select class="input" id="f-fil"></select></div>
+          <div class="field"><label for="f-met">Métier</label><select class="input" id="f-met"></select></div>
+          <div class="field"><label for="f-pays">Pays</label><select class="input" id="f-pays"></select></div>
+          <div class="field"><label for="f-ville">Ville</label><select class="input" id="f-ville"></select></div>
+          <div class="field"><label for="f-sect">Secteur</label><select class="input" id="f-sect"></select></div>
+          <div class="field"><label for="f-niv">Niveau</label><select class="input" id="f-niv"></select></div>
+          <div class="field"><label for="f-lang">Langue</label><select class="input" id="f-lang"></select></div>
+          <div class="field"><label for="f-contrib">Contribution</label><select class="input" id="f-contrib"></select></div>
+        </div>
         <div class="field"><label for="f-exp">Expérience minimale : <span id="f-exp-v" class="num">0</span> ans</label><input id="f-exp" type="range" min="0" max="30" step="1" value="0"></div>
-        <div class="field"><label for="f-lang">Langue parlée</label><select class="input" id="f-lang"></select></div>
-        <div class="field"><label for="f-contrib">Souhaite contribuer par</label><select class="input" id="f-contrib"></select></div>
-        <label class="check"><input type="checkbox" id="f-cv"> CV disponible uniquement</label>
-        <button class="btn btn-ghost btn-sm" type="button" id="f-reset">Effacer les filtres</button>
+        <label class="check"><input type="checkbox" id="f-ent"> Entrepreneurs et indépendants</label>
+        <label class="check"><input type="checkbox" id="f-cv"> CV disponible</label>
       </aside>
       <div style="min-width:0">
         <div class="dir-toolbar">
@@ -231,6 +244,8 @@
       <div class="panel chart-card span-2"><div><h3>Secteur d'activité</h3><p class="sub">Employeur actuel</p></div><div class="chart" id="c-sect"></div></div>
       <div class="panel chart-card span-2"><div><h3>Expérience professionnelle</h3><p class="sub">Années, par tranche</p></div><div class="chart" id="c-exp"></div></div>
       <div class="panel chart-card span-2"><div><h3>Capacités de contribution</h3><p class="sub">Déclarées par les talents</p></div><div class="chart" id="c-contrib"></div></div>
+      <div class="panel chart-card span-3"><div><h3>Entreprises et projets par stade</h3><p class="sub">Entrepreneurs, indépendants, porteurs de projet</p></div><div class="chart" id="c-stade"></div></div>
+      <div class="panel chart-card span-3"><div><h3>Besoins des entrepreneurs</h3><p class="sub">Ce qu'ils recherchent via le réseau</p></div><div class="chart" id="c-besoins"></div></div>
     </div>
   </div>
 </section>
@@ -260,15 +275,58 @@
 
 <!-- ==================== CONNEXION ==================== -->
 <section class="view" id="v-connexion" data-view="connexion" hidden>
-  <div class="wrap section">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">Connexion</span>
-        <h2>Choisir un profil de démonstration</h2>
-        <p>Dans la version cible, la connexion passe par un fournisseur d'identité unique (Keycloak, OpenID Connect) partagé avec le site du RISCE. Ici, choisissez un rôle pour voir ce que chacun peut faire.</p>
-      </div>
+  <div class="wrap section login-wrap">
+    <form class="panel login-card" id="login-form" novalidate>
+      <img src="assets/img/risce-globe.png" alt="" width="54" height="54">
+      <div><span class="eyebrow">Espace membres</span><h2>Se connecter</h2></div>
+      <div class="field"><label for="lg-user">Identifiant</label><input class="input" id="lg-user" autocomplete="username" placeholder="admin"></div>
+      <div class="field"><label for="lg-pwd">Mot de passe</label><input class="input" id="lg-pwd" type="password" autocomplete="current-password"></div>
+      <p class="err" id="lg-err" hidden></p>
+      <button class="btn btn-primary" type="submit">Se connecter</button>
+      <p class="muted" style="font-size:.8rem">Pas encore de compte ? <a href="#rejoindre">Rejoindre RISCE Talents</a></p>
+    </form>
+    <div class="test-accounts">
+      <span class="eyebrow">Comptes de test du prototype</span>
+      <div class="table-wrap"><table class="data">
+        <thead><tr><th>Identifiant</th><th>Mot de passe</th><th>Rôle</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">admin</td><td class="mono">admin</td><td>Administrateur·rice : tout le back-office</td></tr>
+          <tr><td class="mono">referent</td><td class="mono">referent</td><td>Référent·e France : vérifie les demandes de son pays</td></tr>
+          <tr><td class="mono">membre</td><td class="mono">membre</td><td>Membre : fiches complètes et CV</td></tr>
+        </tbody>
+      </table></div>
+      <p class="muted" style="font-size:.85rem">Dans la version cible, la connexion passe par un fournisseur d'identité unique (Keycloak, OpenID Connect) partagé avec le site du RISCE, avec mots de passe chiffrés et double authentification pour les administrateurs.</p>
     </div>
-    <div class="roles" id="roles"></div>
+  </div>
+</section>
+
+<!-- ==================== ENTREPRENEURS ==================== -->
+<section class="view" id="v-entrepreneurs" data-view="entrepreneurs" hidden>
+  <div class="ent-hero">
+    <div class="wrap">
+      <span class="eyebrow" style="color:#C9C3F0">Vitrine</span>
+      <h2>Les entrepreneurs de la diaspora</h2>
+      <p>Chefs d'entreprise, fondateurs de start-up, indépendants et porteurs de projet : le RISCE met en avant celles et ceux qui créent de la valeur, ici et au Sénégal.</p>
+      <div class="ent-kpis" id="ent-kpis"></div>
+    </div>
+  </div>
+  <div class="wrap section" style="display:grid;gap:28px">
+    <div>
+      <div class="section-head" style="margin-bottom:12px"><div><span class="eyebrow">Sélection du RISCE</span><h2>À la une</h2></div></div>
+      <div class="une-grid" id="ent-une"></div>
+    </div>
+    <div>
+      <div class="section-head" style="margin-bottom:12px"><div><span class="eyebrow">Annuaire</span><h2>Toutes les entreprises et projets</h2></div></div>
+      <div class="ent-filters">
+        <div class="field"><label for="e-q">Mot-clé</label><input class="input" id="e-q" type="search" placeholder="Solaire, agritech, conseil…"></div>
+        <div class="field"><label for="e-type">Profil</label><select class="input" id="e-type"></select></div>
+        <div class="field"><label for="e-stade">Stade</label><select class="input" id="e-stade"></select></div>
+        <div class="field"><label for="e-besoin">Recherche</label><select class="input" id="e-besoin"></select></div>
+        <div class="field"><label for="e-sn">Lien avec le Sénégal</label><select class="input" id="e-sn"></select></div>
+      </div>
+      <p class="muted" id="ent-count" style="font-size:.85rem;margin:10px 0"></p>
+      <div class="cards" id="ent-cards"></div>
+    </div>
   </div>
 </section>
 
@@ -279,7 +337,7 @@
       <div>
         <span class="eyebrow">Back-office</span>
         <h2 id="admin-title">Administration</h2>
-        <p id="admin-sub">Circuit de validation des demandes, gestion des profils, référentiels et journal des actions.</p>
+        <p id="admin-sub">Validation des demandes, gestion des profils et de la banque de CV, mise en avant des entrepreneurs, référentiels métiers, comptes et journal.</p>
       </div>
     </div>
     <div class="tabs" role="tablist" id="admin-tabs"></div>
@@ -292,7 +350,7 @@
   <div class="wrap section" style="display:grid;gap:44px">
     <div class="prose">
       <span class="eyebrow">Note de cadrage · Commission stratégie & Commission IT</span>
-      <h2>Une brique « Nos talents » pour le site du RISCE</h2>
+      <h2>RISCE Talents, une brique du site du RISCE</h2>
       <p>Ce prototype illustre un module cartographique qui s'ajoute au site existant du RISCE, sous la forme d'un onglet « Trouver un talent ». Il ne remplace ni le site WordPress, ni l'outil de gestion des adhésions : il les complète avec une couche géographique, une banque de profils consultable et un tableau de bord.</p>
       <p>Trois principes guident la conception : une seule identité par membre, partagée avec l'outil d'adhésion ; une localisation limitée à la ville de résidence, jamais l'adresse ; une visibilité choisie par chaque personne et des agrégats publics sans identité.</p>
     </div>
@@ -305,7 +363,7 @@
           <div class="abox ext"><b>RISCE Manager</b><small>Candidatures et adhésions · référentiel des membres</small></div>
         </div></div>
         <div class="arch-row"><div class="lay">Interface</div><div class="boxes">
-          <div class="abox core"><b>Application « Nos talents »</b><small>talents.risce.org · globe.gl, MapLibre GL JS, Apache ECharts</small></div>
+          <div class="abox core"><b>Application « RISCE Talents »</b><small>talents.risce.org · globe.gl, MapLibre GL JS, Apache ECharts</small></div>
           <div class="abox"><b>Back-office</b><small>Validation, profils, référentiels, journal</small></div>
         </div></div>
         <div class="arch-row"><div class="lay">Identité</div><div class="boxes">
@@ -372,11 +430,24 @@
           </tbody>
         </table>
       </div>
-      <p class="muted" style="font-size:.8rem;margin-top:10px">Initiative contributive de Bathie Ndiaye, membre du COPIL, des commissions Stratégie et IT du RISCE. Le CEGIT est partenaire du RISCE.</p>
+      <p class="muted" style="font-size:.8rem;margin-top:10px">RISCE Talents : initiative contributive de Bathie Ndiaye, membre du COPIL, des commissions Stratégie et IT du RISCE. Le CEGIT est partenaire du RISCE.</p>
     </div>
   </div>
 </section>
 </main>
+
+<footer class="site-foot">
+  <div class="wrap foot-in">
+    <div class="foot-brand">
+      <img src="assets/img/risce-globe.png" alt="" width="34" height="34">
+      <div><b>RISCE Talents</b><span>Réseau International des Sénégalais Cadres et Entrepreneurs de l'Extérieur · <a href="https://www.risce.org/">risce.org</a></span></div>
+    </div>
+    <div class="demo-note">
+      <span><b>Prototype de démonstration</b> · profils et entreprises fictifs, aucune donnée réelle de membre.</span>
+      <button type="button" class="btn btn-ghost btn-sm" id="reset-demo" title="Efface les demandes, validations et modifications faites pendant la démonstration, et restaure les données fictives d'origine">Remettre la démo à zéro</button>
+    </div>
+  </div>
+</footer>
 
 <div id="modal-root"></div>
 <div class="toast" id="toast" hidden role="status"></div>
@@ -386,7 +457,9 @@
 <script src="assets/js/carte.js"></script>
 <script src="assets/js/talents.js"></script>
 <script src="assets/js/tableau.js"></script>
+<script src="assets/js/entrepreneurs.js"></script>
 <script src="assets/js/comptes.js"></script>
+<script src="assets/js/admin.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

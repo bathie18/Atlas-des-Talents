@@ -165,6 +165,22 @@ COMPETENCES = {
     "RH": ["Recrutement", "Gestion des talents", "Formation", "Management interculturel"],
 }
 
+# Profils entrepreneuriaux (entreprises FICTIVES)
+TYPES_ENTREPRENEUR = ["Chef·fe d'entreprise", "Fondateur·rice de start-up", "Indépendant·e / consultant·e", "Porteur·se de projet"]
+STADES = ["Idée / amorçage", "Création (moins de 2 ans)", "Croissance", "Entreprise établie"]
+BESOINS = ["Financement", "Partenaires au Sénégal", "Mentorat", "Recrutement", "Accès au marché", "Visibilité"]
+PREFIXES = ["Baobab", "Teranga", "Sahel", "Kër", "Ndar", "Gorée", "Casamance", "Sine", "Thiossane", "Jappo", "Xaritt", "Yeesal", "Nafa", "Lac Rose", "Niokolo", "Saloum"]
+SUFFIXES = {"NUM": ["Data", "Tech", "Digital", "Cloud"], "GEO": ["Géo", "Cartographie", "Territoires"], "SAN": ["Santé", "Care", "Pharma"],
+            "FIN": ["Invest", "Finance", "Pay"], "ING": ["Industrie", "Engineering"], "ENE": ["Solar", "Énergie", "Water"],
+            "BTP": ["Construction", "Habitat", "BTP"], "AGR": ["Agro", "Agritech", "Récoltes"], "EDU": ["Academy", "Edu", "Savoirs"],
+            "DRO": ["Conseil juridique", "Legal"], "ENT": ["Conseil", "Partners", "Ventures"], "LOG": ["Logistique", "Transit"],
+            "COM": ["Studio", "Médias", "Création"], "RH": ["Talents", "RH Conseil"]}
+ACTIVITES = {"NUM": "solutions logicielles et données pour les entreprises", "GEO": "cartographie et données territoriales", "SAN": "accès aux soins et e-santé",
+             "FIN": "services financiers et mobile money", "ING": "maintenance et production industrielle", "ENE": "énergie solaire et accès à l'eau",
+             "BTP": "construction durable et ingénierie", "AGR": "transformation agricole et circuits courts", "EDU": "formation professionnelle et e-learning",
+             "DRO": "conseil juridique OHADA et conformité", "ENT": "conseil en stratégie et accompagnement des PME", "LOG": "logistique et transit Europe – Afrique de l'Ouest",
+             "COM": "communication, design et production audiovisuelle", "RH": "recrutement et gestion des talents"}
+
 def slug(s):
     s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode()
     return "".join(c if c.isalnum() else "-" for c in s.lower()).strip("-")
@@ -216,6 +232,24 @@ def gen_talents(n=300):
             "cv": random.random() < 0.82, "visibilite": visibilite,
             "accroche": f"{metier} · {annees} ans d'expérience · {random.choice(SECTEURS).lower()}",
         })
+        t = talents[-1]
+        est_entrepreneur = (t["secteur"] in ("Start-up", "Indépendant·e / cabinet") and random.random() < 0.8) \
+            or (filiere == "Entrepreneuriat") or random.random() < 0.08
+        if est_entrepreneur:
+            typ = "Fondateur·rice de start-up" if t["secteur"] == "Start-up" else ("Indépendant·e / consultant·e" if t["secteur"].startswith("Indépendant") else random.choice(TYPES_ENTREPRENEUR))
+            nom_ent = random.choice(PREFIXES) + " " + random.choice(SUFFIXES[dcode])
+            stade = random.choices(STADES, [2, 3, 3, 2])[0] if typ != "Porteur·se de projet" else "Idée / amorçage"
+            t["entreprise"] = {
+                "type": typ, "nom": nom_ent, "stade": stade,
+                "activite": ACTIVITES[dcode],
+                "annee": None if stade == "Idée / amorçage" else random.randint(2012, 2025),
+                "senegal": random.choice(["Activité au Sénégal", "Projet d'implantation au Sénégal", "Activité au Sénégal", "Pas encore"]),
+                "besoins": random.sample(BESOINS, random.choice([1, 2, 2, 3])),
+                "une": False,
+            }
+    ents = [t for t in talents if "entreprise" in t]
+    for t in random.sample(ents, min(6, len(ents))):
+        t["entreprise"]["une"] = True  # mis à la une par l'administration
     return talents
 
 def gen_demandes(talents):
@@ -254,6 +288,7 @@ def main():
                      for c, l, col, fil in DOMAINES],
         "secteurs": SECTEURS, "niveaux": NIVEAUX, "langues": LANGUES,
         "contributions": CONTRIBUTIONS, "statuts": [s for s, _ in STATUTS],
+        "entrepreneuriat": {"types": TYPES_ENTREPRENEUR, "stades": STADES, "besoins": BESOINS},
         "villes": [{"nom": n, "pays": p, "lat": la, "lon": lo} for n, p, la, lo, _ in VILLES]
                   + [{"nom": n, "pays": p, "lat": la, "lon": lo} for n, p, la, lo in VILLES_RECHERCHE],
     }
@@ -261,7 +296,7 @@ def main():
     (OUT / "referentiels.json").write_text(json.dumps(ref, ensure_ascii=False, indent=1))
     (OUT / "talents.json").write_text(json.dumps(talents, ensure_ascii=False))
     (OUT / "demandes.json").write_text(json.dumps(gen_demandes(talents), ensure_ascii=False, indent=1))
-    print(len(talents), "talents fictifs,", len({t['pays'] for t in talents}), "pays,", len({t['ville'] for t in talents}), "villes")
+    print(sum("entreprise" in t for t in talents), "entrepreneurs ;", len(talents), "talents fictifs,", len({t['pays'] for t in talents}), "pays,", len({t['ville'] for t in talents}), "villes")
 
 if __name__ == "__main__":
     main()

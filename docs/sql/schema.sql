@@ -140,6 +140,26 @@ CREATE TABLE talents.document (
   depose_le timestamptz NOT NULL DEFAULT now()
 );
 
+-- Entrepreneuriat : entreprises et projets portés par les talents (vitrine du RISCE)
+CREATE TABLE talents.entreprise (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  profil_id uuid NOT NULL REFERENCES talents.profil(id) ON DELETE CASCADE,
+  type text NOT NULL CHECK (type IN ('chef_entreprise','fondateur_startup','independant','porteur_projet')),
+  nom text NOT NULL,
+  activite text,
+  stade text NOT NULL CHECK (stade IN ('amorcage','creation','croissance','etablie')),
+  annee_creation smallint,
+  lien_senegal text CHECK (lien_senegal IN ('activite','projet_implantation','aucun')),
+  site_web text,
+  a_la_une boolean NOT NULL DEFAULT false,   -- choisi par l'administration
+  publie_le timestamptz
+);
+CREATE TABLE talents.entreprise_besoin (
+  entreprise_id uuid REFERENCES talents.entreprise(id) ON DELETE CASCADE,
+  besoin text NOT NULL,                      -- financement, partenaires, mentorat, recrutement…
+  PRIMARY KEY (entreprise_id, besoin)
+);
+
 -- Recherche plein texte (français, sans accents)
 CREATE TEXT SEARCH CONFIGURATION talents.fr (COPY = french);
 ALTER TEXT SEARCH CONFIGURATION talents.fr ALTER MAPPING FOR hword, hword_part, word WITH unaccent, french_stem;
